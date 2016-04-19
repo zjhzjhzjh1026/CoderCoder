@@ -1,0 +1,23 @@
+/*********************************************************************************
+  *FileName: 1_Two Sum 
+  *Author:  WILL
+  *Version: 1.0
+  *Date:  2016.4.19
+  O(n^2) violent calculation TLE 
+**********************************************************************************/
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {      //暴力方法，O（n^2）方法显然会被TLE了TAT 
+        vector<int> ans;                       
+        int i,j;
+        for(i=0;i<nums.size();i++)
+          for(j=i+1;j<nums.size();j++)
+            if(nums[i]+nums[j]==target){ 
+               ans.push_back(i);
+               ans.push_back(j);
+            }
+      return ans;
+    }
+};
+
+
