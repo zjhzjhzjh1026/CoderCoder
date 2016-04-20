@@ -66,5 +66,6 @@ int binary_search(vector<int> &a,int low,int high,int target){   //二分查找 
              return ans;
           }
         }
+        return ans;
     }
 };
