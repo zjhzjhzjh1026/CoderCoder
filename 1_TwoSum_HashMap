@@ -1,0 +1,28 @@
+/*********************************************************************************
+  *FileName: 1_Two Sum_HashMap 
+  *Author:  WILL
+  *Version: 4.0
+  *Date:  2016.4.20
+  HashMap，O(N)   LC 55%
+**********************************************************************************/
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {   //// O(N) 复杂度 
+        unordered_map<int,int> temp;
+        vector<int> ans;
+        int i,tar_left,n;
+        for(i=0;i<nums.size();i++){
+            tar_left=target-nums[i];
+            if(!temp.count(nums[i]))               //hash表搜索时间为常数，复杂度O（1） 
+                temp.insert(unordered_map<int,int>::value_type(nums[i],i)); 
+            if(temp.count(tar_left)){
+                n=temp[tar_left];
+                if(n<i){
+                    ans.push_back(n);
+                    ans.push_back(i);
+                    return ans;
+                }
+            }
+        }
+    }
+};
