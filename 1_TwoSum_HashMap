@@ -27,3 +27,17 @@ public:
         return ans;
     }
 };
+
+
+/*简洁版写法  未严格验证，手写
+  vector<int> twoSum(vector<int>& nums, int target) {   //// O(N) 复杂度 
+        unordered_map<int,int> temp;
+        for(int i=0;;i++){
+          auto other=temp.find(target-nums[i]);
+          if(other!=temp.end())
+            return vector<int,int> {other->second,i};
+          temp[nums[i]]=i;
+        }
+        return vector<int,int> {i,i};   //无实际意义，防止报错return
+    }
+*/
