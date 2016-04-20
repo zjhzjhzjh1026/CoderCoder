@@ -1,0 +1,28 @@
+/*********************************************************************************
+  *FileName: 1_Two Sum_Map 
+  *Author:  WILL
+  *Version: 3.0
+  *Date:  2016.4.20
+  Map，O(N)
+**********************************************************************************/
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {   //// O(N) 复杂度 
+        map<int,int> temp;
+        vector<int> ans;
+        int i,tar_left,n;
+        for(i=0;i<nums.size();i++){
+            tar_left=target-nums[i];
+            if(!temp.count(nums[i]))               //红黑树搜索复杂度O（logN） 
+                temp.insert(pair<int,int>(nums[i],i));   //注意这个insert函数形式
+            if(temp.count(tar_left)){
+                n=temp[tar_left];
+                if(n<i){
+                    ans.push_back(n);
+                    ans.push_back(i);
+                    return ans;
+                }
+            }
+        }
+    }
+};
