@@ -14,7 +14,7 @@ public:
         for(i=0;i<nums.size();i++){
             tar_left=target-nums[i];
             if(!temp.count(nums[i]))               //红黑树搜索复杂度O（logN） 
-                temp.insert(pair<int,int>(nums[i],i));   //注意这个insert函数形式
+                temp.insert(map<int,int>::value_type(nums[i],i));   //注意这个insert函数形式
             if(temp.count(tar_left)){
                 n=temp[tar_left];
                 if(n<i){
