@@ -1,0 +1,52 @@
+/*********************************************************************************
+  *FileName: 2_AddTwoNums
+  *Author:  WILL
+  *Version: 1.0
+  *Date:  2016.4.22
+  not optimized solution,,,beat 18.74% only
+  Add the numbers bit by bit
+**********************************************************************************/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {     
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+         ListNode* Head=new ListNode(0);
+         ListNode* pointer=Head;     //防止头结点地址丢失
+         int flag=0;
+         while(l1&&l2){
+            pointer->next=new ListNode(0);
+            pointer=pointer->next;
+            pointer->val=(l1->val+l2->val+flag)%10;
+            flag=(l1->val+l2->val+flag)/10;
+            l1=l1->next;
+            l2=l2->next;
+         }
+           while(l1&&!l2){         //l1位数更多 
+            pointer->next=new ListNode(0);
+            pointer=pointer->next;
+            pointer->val=(l1->val+flag)%10;
+            flag=(l1->val+flag)/10;
+            l1=l1->next;
+           }
+           while(!l1&&l2){         //l2位数更多 
+            pointer->next=new ListNode(0);
+            pointer=pointer->next;
+            pointer->val=(l2->val+flag)%10;
+            flag=(l2->val+flag)/10;
+            l2=l2->next;
+           }
+            if(!l1&&!l2)
+           if(flag){         //最高位是否进位
+             pointer->next=new ListNode(1);
+             pointer=pointer->next;
+           }
+         return Head->next;
+    }
+};
