@@ -3,7 +3,7 @@
   *Author:  WILL
   *Version: 1.0
   *Date:  2016.4.19
-  O(n^2) violent calculation TLE 
+  O(n^2) Brute Force TLE 
 **********************************************************************************/
 class Solution {
 public:
