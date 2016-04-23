@@ -11,7 +11,7 @@ public:
         set<char> window;
         int n=s.size(),i=0,j=0,ans=0;   //设置i、j两个指针向右滑动 
         while(i<n&&j<n){
-            if(!window.count(s[j])){    //如果右边新加的元素子串中没有，则加入set，同时更新ans 
+            if(!window.count(s[j])){    //如果右边新加的元素子串中没有，则加入set，同时更新ans ,向右滑动j
                 window.insert(s[j++]);
                 ans=ans>window.size()?ans:window.size();
             }
