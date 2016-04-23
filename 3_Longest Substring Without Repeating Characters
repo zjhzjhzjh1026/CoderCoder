@@ -1,0 +1,24 @@
+/*********************************************************************************
+  *FileName: 3_Longest Substring Without Repeating Characters
+  *Author:  WILL
+  *Version: 1.0
+  *Date:  2016.4.22
+   sliding window solution O(N),beat only 6.05%
+**********************************************************************************/
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        set<char> window;
+        int n=s.size(),i=0,j=0,ans=0;   //设置i、j两个指针向右滑动 
+        while(i<n&&j<n){
+            if(!window.count(s[j])){    //如果右边新加的元素子串中没有，则加入set，同时更新ans 
+                window.insert(s[j++]);
+                ans=ans>window.size()?ans:window.size();
+            }
+            else {                 //否则，删除最左边的字符，右移i，，相当于以i为开头的子串的最大串已经找到了 
+              window.erase(s[i++]);
+            }
+        }
+        return ans;
+    }
+};
