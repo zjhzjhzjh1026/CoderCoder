@@ -1,0 +1,28 @@
+/*********************************************************************************
+  *FileName: 3_Longest Substring Without Repeating Characters_apt1 
+  *Author:  WILL
+  *Version: 2.0
+  *Date:  2016.4.22
+   sliding window solution O(N),beat only 18.65%
+**********************************************************************************/
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<char,int> window;
+        int n=s.size(),i=0,j=0,ans=0;
+        while(i<n&&j<n){
+            char t=s[j];
+                        
+            if(!window.count(t)){
+                window[t]=j++;            
+                ans=ans>window.size()?ans:window.size();
+            }
+            else {
+              int temp=window[t];    //这里一定要存一下，，，因为erase掉后window[t]会消失导致死循环TLE 
+              while(i<=temp)      //改进的部分，，一直跑到上一个重复的地方 
+              window.erase(s[i++]);
+            }
+        }
+        return ans;
+    }
+};
