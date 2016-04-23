@@ -1,0 +1,49 @@
+/*********************************************************************************
+  *FileName: 2_AddTwoNums_longlongint
+  *Author:  WILL
+  *Version: 2.0
+  *Date:  2016.4.22
+  another solution,,,beat 63.70%
+  get two numbers, add them, then make the list 
+**********************************************************************************/
+//笨办法，但是时间效率还不错？ 
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * 
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+         ListNode* Head=new ListNode(0);
+         ListNode* pointer=Head;     
+         long long int num1=0,num2=0,num,ord=1;   //long long int确保链表构成的值不会越int的范围
+         while(l1){
+             num1+=l1->val*ord;
+             l1=l1->next;
+             ord*=10;
+         }
+         ord=1;
+         while(l2){
+             num2+=l2->val*ord;
+             l2=l2->next;
+             ord*=10;
+         }
+         num=num1+num2;
+         if(!num){
+            pointer->next=new ListNode(0); 
+            pointer=pointer->next;
+         }
+         while(num){
+            pointer->next=new ListNode(0); 
+            pointer=pointer->next;
+            pointer->val=num%10;
+            num/=10;
+         }
+         return Head->next;
+    }
+};
