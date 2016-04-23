@@ -1,0 +1,20 @@
+/*********************************************************************************
+  *FileName: 3_Longest Substring Without Repeating Characters_apt3_arraystore 
+  *Author:  WILL
+  *Version: 4.0
+  *Date:  2016.4.22
+   sliding window solution O(N) apt,beat 61.72%
+**********************************************************************************/
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int index[128]={0};  //256无区别，用来记录遇到重复时i应该跳转的位置，有点KMP算法的前半部分思路的意思 
+        int i=0,j,ans=0;
+        for(j=0;j<s.size();j++){
+            i=max(i,index[s[j]]);  //这句摆在下一局的前面，因为如果要跳转的话本来也就不能再算此时的length，而上次的结果已经被考虑了 
+            ans=max(ans,j-i+1);
+            index[s[j]]=j+1;   //跳转应是到重复位的下一位！！！！！所以j+1
+        }
+        return ans;
+    }
+};
