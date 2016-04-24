@@ -1,0 +1,63 @@
+/*********************************************************************************
+  *FileName: 4_MedianSortedArrays_Iterator 
+  *Author:  WILL
+  *Version: 1.0
+  *Date:  2016.4.24
+   mark i,j to trace   68.57%  O(m+n) 
+***********************************************************************************/
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+      /*  nums2.clear();
+        int a[1]={4};
+        int b[1]={1};
+        int t;
+        for(t=0;t<1;t++)
+         nums1.push_back(a[t]);
+        for(t=0;t<1;t++)
+         nums2.push_back(b[t]);*/   //测试用             
+         double temp=0;
+         int i=0,j=0,m,n,mid;
+         m=nums1.size();
+         n=nums2.size();
+         mid=(m+n)/2;
+         if((m+n)%2==1){             //总数奇数个 
+         while(i+j<=mid&&i<m&&j<n){
+             if(nums1[i]<=nums2[j])
+               temp=nums1[i++];
+             else 
+               temp=nums2[j++];
+         }
+         while(i+j<=mid){      //如果其中一个数组已经被遍历到尽头 
+             if(i==m) 
+               temp=nums2[j++];
+             else
+               temp=nums1[i++];
+         }
+        } 
+         else{                        //总数偶数个，需要保存两个数求平均值 
+             while(i+j<mid&&i<m&&j<n){
+             if(nums1[i]<=nums2[j])
+               temp=nums1[i++];
+             else 
+               temp=nums2[j++];
+         }
+         while(i+j<mid){
+             if(i==m) 
+               temp=nums2[j++];
+             else
+               temp=nums1[i++];
+           }
+           if(i==m)                  //第2个数求和 
+             temp+=nums2[j++];
+           else if(j==n)
+             temp+=nums1[i++];
+           else if(nums1[i]<=nums2[j])
+             temp+=nums1[i++];
+           else
+             temp+=nums2[j++];
+           temp/=2;               //取平均值 
+         }        
+        return temp;
+    }
+};
