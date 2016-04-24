@@ -8,7 +8,7 @@
 class Solution {
 public:
     double findKthNum(vector<int>& nums1,int m_left,int m_right,vector<int>& nums2,int n_left,int n_right,int k){  
-                                              //记录左标记是为了方便在vector容器中做“删除”至多k/2个数的操作 
+                                          //记录最小坐标值是为了方便在vector容器中做“删除”至多k/2（或m）个数的操作 
         int m=m_right-m_left;
         int n=n_right-n_left;
         if(m>n)   //后续基于第一个数组短于或等于第二个
