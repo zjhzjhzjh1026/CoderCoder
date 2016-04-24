@@ -3,7 +3,7 @@
   *Author:  WILL
   *Version: 3.0
   *Date:  2016.4.25
-  68.57%  O(n)  Recursive algorithm to search the kth min value
+  68.57%  O(log(m+n))  Recursive algorithm to search the kth min value
 ***********************************************************************************/
 class Solution {
 public:
