@@ -1,0 +1,42 @@
+/*********************************************************************************
+  *FileName: 4_MedianSortedArrays_findKthNums 
+  *Author:  WILL
+  *Version: 3.0
+  *Date:  2016.4.25
+  68.57%  O(n)  Recursive algorithm to search the kth min value
+***********************************************************************************/
+class Solution {
+public:
+    double findKthNum(vector<int>& nums1,int m_left,int m_right,vector<int>& nums2,int n_left,int n_right,int k){  
+                                              //记录左标记是为了方便在vector容器中做“删除”至多k/2个数的操作 
+        int m=m_right-m_left;
+        int n=n_right-n_left;
+        if(m>n)   //后续基于第一个数组短于或等于第二个
+          return findKthNum(nums2,n_left,n_right,nums1,m_left,m_right,k);
+        if(m==0)  
+          return nums2[n_left+k-1];
+        if(k==1)   //递归的初始情况
+          {return min(nums1[m_left],nums2[n_left]); }
+          
+        int p1,p2;
+        p1=min(k/2,m);  //将k分为2部分，m是为了防止p1长度不够一半的情况
+        p2=k-p1;
+        if(nums1[m_left+p1-1]<nums2[n_left+p2-1])    //第k/2小，则代表这些数不可能是第k个最小数 
+          return findKthNum(nums1,m_left+p1,m_right,nums2,n_left,n_right,k-p1);
+        else if(nums1[m_left+p1-1]>nums2[n_left+p2-1])  //-1非常重要！！易遗漏，，因为nums1[m_left]本身有值，则再加上“P1”个数就超过了！！ 
+          return findKthNum(nums1,m_left,m_right,nums2,n_left+p2,n_right,k-p2);
+        else 
+          return nums1[m_left+p1-1];   //如果这两个数组k/2位刚好相等，，则合起来的第k位就是这个数 
+    }
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {     
+       int m,n,k;
+       m=nums1.size();
+       n=nums2.size();
+       k=m+n;
+       if(k%2==1)      //奇，则中位数唯一 
+         return findKthNum(nums1,0,m,nums2,0,n,k/2+1);
+       else            //偶，则中位数为中间两数的平均值 
+       {temp=findKthNum(nums1,0,m,nums2,0,n,k/2+1);  
+        return (findKthNum(nums1,0,m,nums2,0,n,k/2)+findKthNum(nums1,0,m,nums2,0,n,k/2+1))/2;}
+    }
+};
