@@ -19,7 +19,7 @@ public:
          }
             int ans=0,j=0,sys=1;
          vector<int> p(s_resize.size(),0);
-         for(int i=1;i<(2*len+2);i++){
+         for(int i=1;i<(2*len+2);i++){   //此处作用域必须包含完整，防止在短样本情况下出现碧油鸡
              if(i<(j+p[j])){     //i必须在此时j+p[j]的作用域内才能减少运算
               p[i]=min(p[j*2-i],j+p[j]-i);   //左边是对称原理，，右边的是限制对称点的那个最大的个数不是超出了j+p[j]范围的
              }
