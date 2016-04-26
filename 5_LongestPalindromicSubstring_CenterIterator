@@ -1,0 +1,30 @@
+/*********************************************************************************
+  *FileName:5_LongestPalindromicSubstring_CenterIterator 
+  *Author:  WILL
+  *Version: 2.0
+  *Date:  2016.4.26
+  iterator the center element  32.42%  O(N^2)
+**********************************************************************************/
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int start=0,ans=0;
+        for(int i=0;i<s.size();i++){
+            int len1=findSub(s,i,i);
+            int len2=findSub(s,i,i+1);
+            int len=max(len1,len2);
+            if(len>ans){
+                ans=len;
+                start=i-(len-1)/2;
+            }
+        }
+        return s.substr(start,ans);   //输出从start开始长度为ans的子串 
+    }
+    int findSub(string s,int left,int right){
+        while(left>=0&&right<s.size()&&s[left]==s[right]){
+            left--;
+            right++;
+        }
+        return right-left+1-2;   //首标-尾标+1才是长度，但是前面right和left多加减了1，所以需要-2 
+    }
+};
