@@ -1,0 +1,42 @@
+/*********************************************************************************
+  *FileName:5_LongestPalindromicSubstring_Manacher
+  *Author:  WILL
+  *Version: 1.0
+  *Date:  2016.4.26
+  Manacher Algo.  76.46% 
+**********************************************************************************/
+class Solution {
+public:
+    string longestPalindrome(string s) {   ///////重要易遗忘算法！！！Manacher算法       
+         string s_resize;
+         int len=s.size();
+         s_resize.resize(2*len+2);
+         s_resize[0]='@'; //防止溢出
+         s_resize[1]='#';  //使整个结构对称
+         for(int i=1;i<len+1;i++){   //偶数个回文变奇数个
+             s_resize[2*i]=s[i-1];
+             s_resize[2*i+1]='#'; 
+         }
+            int ans=0,j=0,sys=1;
+         vector<int> p(s_resize.size(),0);
+         for(int i=1;i<(2*len+2);i++){
+             if(i<(j+p[j])){     //i必须在此时j+p[j]的作用域内才能减少运算
+              p[i]=min(p[j*2-i],j+p[j]-i);   //左边是对称原理，，右边的是限制对称点的那个最大的个数不是超出了j+p[j]范围的
+             }
+             else p[i]=1;   //不能简化运算的话只能从长度1开始找
+             while(s_resize[i+p[i]]== s_resize[i-p[i]]) p[i]++;
+             if(p[i]>ans){
+                sys=i;
+                ans=p[i];
+             }
+             if(i+p[i]>j+p[j])    //如果此轮求出的作用域更大，，，替换
+               j=i;
+         }
+         string ret="";
+         int start=sys-(ans-1)+1;
+         for(int i=0;i<ans-1;i++)
+           ret+=s_resize[start+i*2];
+           
+         return ret;
+    }
+};
