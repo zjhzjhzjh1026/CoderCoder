@@ -1,0 +1,32 @@
+/*********************************************************************************
+  *FileName:5_LongestPalindromicSubstring_DP_TLE
+  *Author:  WILL
+  *Version: 3.0
+  *Date:  2016.4.26
+  DP without Memory search,TLE
+**********************************************************************************/
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int i,j,max=0,start=0,end=s.size()-1;
+        for(i=0;i<s.size();i++)
+          for(j=s.size();j>=i;j--)
+             if(dfs(s,i,j)&&(j-i)>max){
+                 max=j-i;
+                 start=i;
+                 end=j;
+                 break;
+             }
+        return s.substr(start,max+1);
+    }
+    
+    bool dfs(string s,int i,int j){
+
+         if(i==j)
+          return true;
+         else if(j==(i+1))
+          return s[i]==s[j];
+         else 
+          return dfs(s,i+1,j-1)&&(s[i]==s[j]);
+    }
+};
