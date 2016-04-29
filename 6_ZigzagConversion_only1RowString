@@ -14,7 +14,7 @@ public:
          int boarderRowStep=2*(numRows-1);
          for(int i=0;i<numRows;i++){
              if(!i||i==numRows-1)
-               for(int j=i;j<len;j+=boarderRowStep)  //头行和尾行单独处理
+               for(int j=i;j<len;j+=boarderRowStep)  //头、尾行单独处理
                  ans.push_back(s[j]);
              else{
                 int j=i;
