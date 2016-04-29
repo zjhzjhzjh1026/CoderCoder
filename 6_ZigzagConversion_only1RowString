@@ -1,0 +1,40 @@
+  *FileName:6_ZigzagConversion_only1RowString 
+  *Author:  WILL
+  *Version: 2.0
+  *Date:  2016.4.29
+  52.6%     
+**********************************************************************************/
+class Solution {
+public:
+    string convert(string s, int numRows) {  //用一个string结构按照输出的顺序一个一个的写进去，读的时候顺序读取 
+         if(numRows==1)
+           return s;
+         string ans="";
+         int len=s.size();
+         int boarderRowStep=2*(numRows-1);
+         for(int i=0;i<numRows;i++){
+             if(!i||i==numRows-1)
+               for(int j=i;j<len;j+=boarderRowStep)  //头行和尾行单独处理
+                 ans.push_back(s[j]);
+             else{
+                int j=i;
+                bool flag=true;
+                int insideRowStep1=2*(numRows-i-1);      //步长计算的公式
+                int insideRowStep2=boarderRowStep-insideRowStep1;
+                while(j<len){
+                    if(flag){                     //每行都有两种步长交替
+                        ans.push_back(s[j]);
+                        j+=insideRowStep1;
+                    }
+                    else{
+                        ans.push_back(s[j]);
+                        j+=insideRowStep2;
+                    }
+                    flag=!flag;
+                      
+                }
+             }
+         }
+        return ans;
+    }
+};
