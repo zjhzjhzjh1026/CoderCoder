@@ -1,0 +1,32 @@
+/*********************************************************************************
+  *FileName:6_ZigzagConversion 
+  *Author:  WILL
+  *Version: 1.0
+  *Date:  2016.4.29
+  20.63%-->34.41% 
+**********************************************************************************/
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(numRows==1)        //边界条件 
+          return s;
+        string *str = new string[numRows];  //申请numRows个string，向下插入，在一行一行读出即是结果 
+        int len=s.size();
+        int point=0,step;
+        
+        for(int i=0;i<len;i++){
+           str[point].push_back(s[i]);
+           if(!point)       //向下走 
+             step=1;
+           else if(point==numRows-1)  //向上走 
+             step=-1;
+           point+=step;
+        }
+        string ans=""; 
+        for(int i=0;i<numRows;i++){
+            ans.append(str[i]);
+        }
+        delete[] str;  //加一句运行时间由29ms变到24ms 
+        return ans;
+    }
+};
