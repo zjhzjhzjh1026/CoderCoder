@@ -1,0 +1,19 @@
+/*********************************************************************************
+  *FileName:7_IntegerReverse_CodeSimplified 
+  *Author:  WILL
+  *Version: 2.0
+  *Date:  2016.5.12
+  be careful of integer overflow!!
+**********************************************************************************/
+class Solution {
+public:
+    int reverse(int x) {
+       long long ans=0;
+       while(x){
+          ans=ans*10+x%10;
+          x/=10;
+       }
+       ans=(ans>INT_MAX||ans<INT_MIN)?0:ans;//溢出检测 -2147483648————————2147483647
+       return ans;
+    }
+};
