@@ -9,7 +9,7 @@ class Solution {
 public:
 
    void quickSort(vector<int> &a,int low,int high,vector<int>& symbol){  //快排   O(nlogn)
-    if(low>=high)    //一定要有，，否则会段违例 ~！~~ 
+    if(low>=high)    //一定要有，，否则会段违例 ~！~~ //symbol是用来记录原数组中的位置，，因为进行了排序改变了顺序
      return;
     int i=low;
     int j=high; 
