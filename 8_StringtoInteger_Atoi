@@ -11,7 +11,7 @@ public:
         int i=0;
         long long ans=0;
         bool flag=true;
-        while(str[i]==' ') i++;    //whitespace 
+        while(str[i]==' ') i++;    //whitespace or str.find_first_not_of(' ');
         if(str[i]=='-'){
             flag=false;
             i++;
@@ -19,7 +19,7 @@ public:
         else if(str[i]=='+'){      //前导+号 
             i++;
         }
-        while(str[i]>='0'&&str[i]<='9'){   //遇到非数字字符便终止 
+        while(str[i]>='0'&&str[i]<='9'){   //遇到非数字字符便终止   换成isdigit函数之后 时间从8ms上升到20ms？？？
             ans=ans*10+(str[i]-'0');
             if(ans>INT_MAX||ans<INT_MIN)   //防止long long int越界 
              break;
