@@ -1,0 +1,29 @@
+/*********************************************************************************
+  *FileName:9_PalindromeNumber
+  *Author:  WILL
+  *Version: 1.0
+  *Date:  2016.5.15
+   76ms, beats 65.37%
+**********************************************************************************/
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0)          //负数直接结束 
+          return false;
+        int high,low;
+        long long order=1;
+        while(x/order){          //求多少位数 
+            order*=10;
+        }
+        order/=10;
+        while(x){
+          high=x/order;
+          low=x%10;
+          if(low!=high) 
+            return false;
+          x=x%order/10;    
+          order/=100;      //每次去掉最高位和最低位 
+        }
+        return true;
+    }
+};
