@@ -1,0 +1,20 @@
+/*********************************************************************************
+  *FileName:9_PalindromeNumber_ReverseHalf 
+  *Author:  WILL
+  *Version: 2.0
+  *Date:  2016.5.15
+   84ms, beats 52.87%
+**********************************************************************************/
+class Solution {   //将后半倒序再与前一半比较的思想 
+public:
+    bool isPalindrome(int x) {
+        if(x<0||(x&&!(x%10)))   //eg.40这种，因为不能看做040，所以非palindrome 
+          return false;
+        int n=0;
+        while(x>n){
+            n=n*10+x%10;
+            x/=10;
+        }
+        return (x==n)||(x==n/10);  //分别对应偶数位和奇数位的情况 
+    }
+};
