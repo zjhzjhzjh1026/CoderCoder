@@ -1,5 +1,5 @@
 /*********************************************************************************
-  *FileName:*10_RegularExpressionMatching_dpArraySoFast
+  *FileName:*10_RegularExpressionMatching_dpArrayDFSSoFast
   *Author:  Javan_Z
   *Version: 2.0
   *Date:  2016.5.16
@@ -20,7 +20,7 @@ public:
           for(int j=1;j<=plen;j++){
               if(p[j-1]!='*')  //非*，则 dp[i-1][j-1]==true加上第i-1位相等即可递推 
                 dp[i][j]=dp[i-1][j-1]&&(s[i-1]==p[j-1]||p[j-1]=='.');
-              else  //为*，1是直接取0个，对应||前的部分，2是dp[i-1][j]为true，且s[i-1]位与p[j-2]位匹配，那么即可再把*代表的元素+1个 
+              else   //为*，1是直接取0个，对应||前的部分，2是dp[i-1][j]为true，且s[i-1]位与p[j-2]位匹配，那么即可再把*代表的元素+1个 
                 dp[i][j]=dp[i][j-2]||(s[i-1]==p[j-2]||p[j-2]=='.')&&dp[i-1][j];
           }
          return dp[slen][plen];
