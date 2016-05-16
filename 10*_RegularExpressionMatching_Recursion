@@ -1,0 +1,18 @@
+/*********************************************************************************
+  *FileName:*10_RegularExpressionMatching_Recursion 
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.16
+Recusive matching,very slow,600+ms
+**********************************************************************************/
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        if(p.empty()) 
+          return s.empty();
+        if(p[1]=='*')  //p的下一位为*时，2cases,1是*取0个，直接跳，2是如果当前位match就每次多取1位 
+          return isMatch(s,p.substr(2))||!s.empty()&&(p[0]==s[0]||p[0]=='.')&&isMatch(s.substr(1),p);
+        else       //非*的时候就一种为true的情况。当位匹配，子串继续递归 
+          return !s.empty()&&isMatch(s.substr(1),p.substr(1))&&(p[0]==s[0]||p[0]=='.');
+    }
+};
