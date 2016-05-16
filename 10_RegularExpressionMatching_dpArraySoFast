@@ -1,0 +1,28 @@
+/*********************************************************************************
+  *FileName:*10_RegularExpressionMatching_dpArraySoFast
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.5.16
+  dp[i][j] denotes that s[0,1,...,i-1] matches p[0,1,...,j-1] 16ms 52.96% 
+**********************************************************************************/
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int slen=s.size();
+        int plen=p.size();
+        vector<vector<bool>> dp(slen+1,vector<bool>(plen+1,false));  //declare 2-d vector container 
+        dp[0][0]=true;
+        for(int i=1;i<=slen;i++)  //p为空，此时自然不可能匹配成功 
+          dp[i][0]=false;
+        for(int j=1;j<=plen;j++)  //空串能否和p[0,1,...,j-1]匹配成功可以看能否和p[0,1,...,j-3]匹配且p[j-1]是否为*，（取0个p[j-2]） 
+          dp[0][j]=j>1&&'*'==p[j-1]&&dp[0][j-2];
+        for(int i=1;i<=slen;i++)
+          for(int j=1;j<=plen;j++){
+              if(p[j-1]!='*')  //非*，则 dp[i-1][j-1]==true加上第i-1位相等即可递推 
+                dp[i][j]=dp[i-1][j-1]&&(s[i-1]==p[j-1]||p[j-1]=='.');
+              else  //为*，1是直接取0个，对应||前的部分，2是dp[i-1][j]为true，且s[i-1]位与p[j-2]位匹配，那么即可再把*代表的元素+1个 
+                dp[i][j]=dp[i][j-2]||(s[i-1]==p[j-2]||p[j-2]=='.')&&dp[i-1][j];
+          }
+         return dp[slen][plen];
+    }
+};
