@@ -1,0 +1,48 @@
+/*********************************************************************************
+  *FileName:*10_RegularExpressionMatching_RecursionTLE 
+  *Author:  Javan_Z
+  *Version: 0.0
+  *Date:  2016.5.16
+Recusive matching,very slow,TLE
+**********************************************************************************/
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int slen=s.size();
+        int plen=p.size();
+        if(!slen&&!plen)
+          return true;
+        char s0=getChar(s,0);
+        char p0=getChar(p,0);
+        char p1=getChar(p,1);
+      //  cout<<s0<<" "<<p0<<" "<<p1<<endl;
+        if(p1!='*'){
+          if(doMatch(s0,p0)){
+            if (slen==0)
+            return false;
+            return isMatch(s.substr(1),p.substr(1));}
+        }
+        else{
+           bool mark=isMatch(s.substr(0),p.substr(2));  //尝试*代表空串的case 
+           if (mark)                    //思想是去搜寻所有可能的true，如果最后没true则返回false
+              return mark;
+           int i=0;
+           while(i<slen&&doMatch(s0,p0)){  
+             bool mark=isMatch(s.substr(i+1),p.substr(2));  
+             if (mark) 
+               return mark;
+             i++;
+           }
+        } 
+        return false;
+    }
+private:
+    char getChar(string a,int n){
+        if(a.size()>n)
+          return a[n];
+        return 0;
+    }
+    bool doMatch(char a,char b){
+        return (a==b||b=='.');
+    }
+};
