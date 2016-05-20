@@ -3,7 +3,7 @@
   *Author:  Javan_Z
   *Version: 1.0
   *Date:  2016.5.20
-  bucket solution，O（N），34.27%，24ms 
+  bucket solution，O（N），beats 34.27%(70% same)，24ms 
 **********************************************************************************/
 class Solution {     //从左右往中间夹出结果 
 public:
