@@ -5,7 +5,7 @@
   *Date:  2016.5.21
   4ms,beats 35.42%(but fastest)  find the longest substring of a set of strings.
 **********************************************************************************/
-class Solution {
+class Solution { //这是一个一个单词比较过去，，也可以先比较所有字符串的第一个字符，再第二个，第三个……
 public:
     string longestCommonPrefix(vector<string>& strs) {
         if(strs.empty()) return "";
