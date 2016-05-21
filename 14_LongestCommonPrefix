@@ -1,0 +1,20 @@
+/*********************************************************************************
+  *FileName:14_LongestCommonPrefix 
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.21
+  4ms,beats 35.42%(but fastest)  find the longest substring of a set of strings.
+**********************************************************************************/
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        if(strs.empty()) return "";
+        string temp=strs[0];
+        for(int i=1;!temp.empty()&&i<strs.size();i++){  //检查完整个strs或者共同子串已经为空 
+            int p;
+            for(p=0;p<temp.size()&&temp[p]==strs[i][p];p++){} //每位挨着对比 
+            temp=temp.substr(0,p);  //取第0位开始的p个字符的子串 
+        }
+        return temp;
+    }
+};
