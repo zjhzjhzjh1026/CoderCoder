@@ -1,0 +1,26 @@
+/*********************************************************************************
+  *FileName:17_LetterCombinationsofPhoneNumber
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.22
+  0ms 
+**********************************************************************************/
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+       vector<string> res;
+       if(digits.empty())
+         return res;
+       string charmap[10] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+       res.push_back("");
+       for(int i=0;i<digits.size();i++){
+          string temp=charmap[digits[i]-'0'];
+          vector<string> temp2;
+          for(int j=0;j<temp.size();j++)   //这个双重循环是关键 
+            for(int k=0;k<res.size();k++)
+              temp2.push_back(res[k]+temp[j]);
+          res=temp2;
+       }
+       return res;
+    }
+};
