@@ -1,0 +1,37 @@
+/*********************************************************************************
+  *FileName:17_LetterCombinationsofPhoneNumber_backTracing 
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.5.22
+  2ms,Important thought!!!!! 
+**********************************************************************************/
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        vector<string> res;
+        if(digits.empty())
+          return res;
+        string temp;
+        vector<vector<char>> table(2,vector<char>());  //初始化时把索引0和1的位置已占掉
+        table.push_back(vector<char>{'a','b','c'}); //table[2]
+        table.push_back(vector<char>{'d','e','f'});
+        table.push_back(vector<char>{'g','h','i'});
+        table.push_back(vector<char>{'j','k','l'}); 
+        table.push_back(vector<char>{'m','n','o'});
+        table.push_back(vector<char>{'p','q','r','s'});
+        table.push_back(vector<char>{'t','u','v'});
+        table.push_back(vector<char>{'w','x','y','z'});
+        
+        backTracing(table,res,temp,0,digits);
+        return res;
+    }
+    void backTracing(const vector<vector<char>>& table,vector<string>& res,string& temp,int idx,string& digits){
+        if(idx==digits.size())
+         res.push_back(temp);
+        else for(int i=0;i<table[digits[idx]-'0'].size();i++){
+            temp.push_back(table[digits[idx]-'0'][i]);
+            backTracing(table,res,temp,idx+1,digits);
+            temp.pop_back();   //每次pop一个字符，而不是一个字符串！ 
+        } 
+    }
+};
