@@ -1,0 +1,35 @@
+/*********************************************************************************
+  *FileName:15_3Sums_unorderedmap 
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.5.22
+  O(N^2),120ms, beats 2.34%
+**********************************************************************************/
+class Solution {   //i先确定target，然后使用hash table作二元找SUM为target的问题 
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> ans;
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<nums.size();i++){
+            int tar=-nums[i];
+            unordered_map<int,int> temp;
+            for(int j=i+1;j<nums.size();j++){
+                if(!temp.count(nums[j]))    //这里这种算法思路挺重要 
+                  temp.insert(unordered_map<int,int>::value_type(nums[j],j));
+                int tar_left=tar-nums[j];
+                if(temp.count(tar_left)&&temp[tar_left]<j){
+                    vector<int> temp2(3);
+                    temp2[0]=nums[i];
+                    temp2[1]=tar_left;
+                    temp2[2]=nums[j];
+                    ans.push_back(temp2);
+                    while(nums[j]==nums[j+1]&&j<nums.size())   //跳过j的相同元素 
+                        j++;
+                }
+                    while(nums[i]==nums[i+1]&&i<nums.size())   //跳过i的相同元素，避免重复3元组输出 
+                        i++;
+            }
+        }
+        return ans;
+    }
+};
