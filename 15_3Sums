@@ -1,0 +1,39 @@
+/*********************************************************************************
+  *FileName:15_3Sums
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.22
+  O(N^2),56ms, beats 53.87%
+**********************************************************************************/
+class Solution {  //防止输出重复三元组，，故（对每个元素！！！！比如i不会重复，，则不会产生重复三元组）直接跳过重复元素 
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> ans;
+        sort(nums.begin(),nums.end()); //排序时间复杂度O（nlogn），改进的快排 
+        for(int i=0;i<nums.size();i++){
+            int tar=-nums[i];
+            int start=i+1;
+            int end=nums.size()-1;
+              while(start<end){
+                  if(nums[start]+nums[end]>tar)
+                    end--;
+                  else if(nums[start]+nums[end]<tar)
+                    start++;
+                  else{
+                      vector<int> temp(3);
+                      temp[0]=nums[i];
+                      temp[1]=nums[start];
+                      temp[2]=nums[end];
+                      ans.push_back(temp);
+                  while(start<end&&nums[start]==temp[1]) //跳过start的重复元素 
+                     start++; 
+                  while(start<end&&nums[end]==temp[2])  //跳过end的重复元素 
+                     end--;
+                  }
+              }
+             while(i+1<nums.size()&&nums[i]==nums[i+1]) //跳过i的重复元素 
+                     i++;
+        }
+        return ans;
+    }
+};
