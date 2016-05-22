@@ -1,0 +1,31 @@
+/*********************************************************************************
+  *FileName:16_3SumsClosest
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.22
+  O(N^2),16ms, beats 37.09%
+**********************************************************************************/
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end()); //先排序 O（NlogN） 
+        int dif=INT_MAX,ans=0;
+        for(int i=0;i<nums.size();i++){
+            int start=i+1;
+            int end=nums.size()-1;
+            while(start<end){
+            if(abs(nums[i]+nums[start]+nums[end]-target)<dif){ //如果离得更近，则替换ans和dif 
+              ans=nums[i]+nums[start]+nums[end];
+              dif=abs(nums[i]+nums[start]+nums[end]-target);
+            }
+            if(nums[i]+nums[start]+nums[end]>target) //正负交替尝试 
+             end--;
+            else if(nums[i]+nums[start]+nums[end]<target)
+             start++;
+            else
+             return target;   
+            }
+        }
+        return ans;
+    }
+};
