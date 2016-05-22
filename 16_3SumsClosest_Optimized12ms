@@ -14,8 +14,8 @@ public:
             int start=i+1;
             int end=nums.size()-1;
             while(start<end){
-            int currentSum=nums[i]+nums[start]+nums[end];  //一次算好 
-            if (currentSum==target)   //前置节省无用运算的时间 
+            int currentSum=nums[i]+nums[start]+nums[end];  //一次算好节约2ms
+            if (currentSum==target)   //直接返回前置，节省无用运算的时间 
                 return target;
             if(abs(currentSum-target)<dif){
               ans=currentSum;
