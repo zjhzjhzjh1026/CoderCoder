@@ -1,0 +1,29 @@
+/*********************************************************************************
+  *FileName:15_3Sums_TLE
+  *Author:  Javan_Z
+  *Version: 0.0
+  *Date:  2016.5.22
+  O(N^3),TLE
+**********************************************************************************/
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(),nums.end());    //排序
+        vector<vector<int>> ans;
+        vector<int> temp(3);
+        for(int i=0;i<nums.size();i++)
+          for(int j=i+1;j<nums.size();j++)
+            for(int k=j+1;k<nums.size();k++){
+                if(nums[i]+nums[j]+nums[k]==0){
+                    temp[0]=nums[i];
+                    temp[1]=nums[j];
+                    temp[2]=nums[k];
+                    ans.push_back(temp);
+                }
+                else if(nums[i]+nums[j]+nums[k]>0)
+                     break;
+            }
+            ans.erase(unique(ans.begin(),ans.end()),ans.end());  //滤除相同元素 
+            return ans;
+    }
+};
