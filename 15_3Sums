@@ -6,7 +6,7 @@
   O(N^2),56ms, beats 53.87%
 **********************************************************************************/
 class Solution {  //防止输出重复三元组，，故（对每个元素！！！！比如i不会重复，，则不会产生重复三元组）直接跳过重复元素 
-public:
+public:               //先确定i，那么问题就变成了求两个和等于-nums【i】的问题
     vector<vector<int>> threeSum(vector<int>& nums) {
         vector<vector<int>> ans;
         sort(nums.begin(),nums.end()); //排序时间复杂度O（nlogn），改进的快排 
