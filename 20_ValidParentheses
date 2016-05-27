@@ -1,0 +1,24 @@
+/*********************************************************************************
+  *FileName:20_ValidParentheses
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.27
+  0ms, Use Stack to do the match 
+**********************************************************************************/
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> flow; //栈 
+        int i=0;
+        while(s[i]){
+            if(s[i]=='('||s[i]=='{'||s[i]=='[')
+              flow.push(s[i]);
+            else if(flow.empty()||s[i]==')'&&'('!=flow.top()||s[i]=='}'&&'{'!=flow.top()||s[i]==']'&&'['!=flow.top()){//判断为空一定要放在最前面！！！ 
+                return false;
+            }
+            else flow.pop();
+            i++;
+        }
+    return flow.empty();  //检查此时栈内是否还有未被匹配的左括号 
+    }
+};
