@@ -10,7 +10,7 @@ public:
     bool isValid(string s) {
         stack<char> flow; //栈 
         int i=0;
-        while(s[i]){
+        while(s[i]){       //注意for(char c : s)这种替代写法，， 还有for(char &c : s)可以节省时间 
             if(s[i]=='('||s[i]=='{'||s[i]=='[')
               flow.push(s[i]);
             else if(flow.empty()||s[i]==')'&&'('!=flow.top()||s[i]=='}'&&'{'!=flow.top()||s[i]==']'&&'['!=flow.top()){//判断为空一定要放在最前面！！！ 
