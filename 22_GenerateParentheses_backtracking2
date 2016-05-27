@@ -1,0 +1,20 @@
+/*********************************************************************************
+  *FileName:22_GenerateParentheses_backtracking2 
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.5.22
+  0ms,beats 36.4%,simplified Codes！！！！ 
+**********************************************************************************/
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        backTracking(res,"",n,0);
+        return res;
+    }
+    void backTracking(vector<string>& res,string temp,int n,int m){
+        if(m==0&&n==0) res.push_back(temp);
+        if(m>0) backTracking(res,temp+")",n,m-1);
+        if(n>0) backTracking(res,temp+"(",n-1,m+1);
+    }
+};
