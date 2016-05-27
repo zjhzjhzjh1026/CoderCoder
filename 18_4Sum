@@ -3,18 +3,21 @@
   *Author:  Javan_Z
   *Version: 1.0
   *Date:  2016.5.27
-  O(N^3),72ms, beats 67.61%
+  O(N^3),64ms, beats 76.47%
 **********************************************************************************/
-class Solution {      //思路同3Sum 
+class Solution {   //思路同3Sum
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         sort(nums.begin(),nums.end());
         vector<vector<int>> ans;
-        for(int i=0;i<nums.size();i++){
-          for(int j=i+1;j<nums.size();j++){
+        int len=nums.size();    //一次得到 
+        if(len<4)  
+          return ans;
+        for(int i=0;i<len-3;i++){     //-3 
+          for(int j=i+1;j<len-2;j++){
               int tar=target-nums[i]-nums[j];
               int front=j+1;
-              int rear=nums.size()-1;
+              int rear=len-1;
               while(front<rear){
                   int temp=nums[front]+nums[rear];
                   if(temp<tar)
@@ -34,10 +37,10 @@ public:
                     rear--;
                   }
               }
-              while(j+1<nums.size()&&nums[j]==nums[j+1])
+              while(j+1<len&&nums[j]==nums[j+1])
                 j++;
           }
-              while(i+1<nums.size()&&nums[i]==nums[i+1])
+              while(i+1<len&&nums[i]==nums[i+1])
                 i++;
         }
           return ans;
