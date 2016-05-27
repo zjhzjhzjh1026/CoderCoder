@@ -1,0 +1,37 @@
+/*********************************************************************************
+  *FileName:19_RemoveNthNodeFromEndofList
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.27
+  8ms, beats 3.26%,2 rounds iteration
+**********************************************************************************/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* pointer=head;
+        int count=0;
+        while(pointer){         //求总长度 
+            pointer=pointer->next;
+            count++;
+        }
+        n=count-n;
+        if(!n)
+          return head->next;
+        pointer=head;
+        cout<<n;
+        while(--n){     //找到目标Node并跳过它 
+            pointer=pointer->next;
+        }
+        cout<<pointer->val;
+        pointer->next=pointer->next->next;
+        return head;
+    }
+};
