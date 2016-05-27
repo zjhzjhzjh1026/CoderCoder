@@ -1,0 +1,35 @@
+/*********************************************************************************
+  *FileName:19_RemoveNthNodeFromEndofList_OnePass
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.5.27
+  4ms, beats 21.25%,finish in one pass.
+**********************************************************************************/
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {  //所有单向链表反序取元素都可以用这种思想 
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* p1=head;    //用两个标记一轮完成 
+        ListNode* p2=head;
+        while(n){
+            p1=p1->next;
+            n--;
+        }
+        if(!p1)
+            return head->next;
+        p1=p1->next;  
+        while(p1){
+            p1=p1->next;
+            p2=p2->next;
+        }
+        p2->next=p2->next->next;
+        return head;
+    }
+};
