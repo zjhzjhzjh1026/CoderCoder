@@ -1,0 +1,33 @@
+/*********************************************************************************
+  *FileName:22_GenerateParentheses_backtracking 
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.22
+  0ms,beats 36.4%,Important thought!!!!! 
+**********************************************************************************/
+class Solution {  //非常重要！！！ 
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        vector<char> table={'(',')'};
+        string temp;
+        backTracking(res,temp,2*n,0,0,table);
+        return res;
+    }
+    void backTracking(vector<string>& res,string& temp,int n,int idx,int count,vector<char>& table){
+        if(idx==n){//放满6个字符 
+         if(!count)  //限制6个刚好是3对！不能放在上面一起判断！！！会导致无限进入else！！ 
+         res.push_back(temp);
+        }
+        else{
+          temp.push_back(table[0]);
+          backTracking(res,temp,n,idx+1,count+1,table);  
+          if(count){   //此时可以放右括号 
+              temp.pop_back();
+              temp.push_back(table[1]);
+              backTracking(res,temp,n,idx+1,count-1,table); 
+          }
+          temp.pop_back();
+        }
+    }
+};
