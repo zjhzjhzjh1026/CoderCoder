@@ -1,0 +1,19 @@
+/*********************************************************************************
+  *FileName:24_SwapNodesinPairs_Recursive
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.5.28
+  4ms, beats 1.83%
+**********************************************************************************/
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {  //recursive
+        if(!head) return nullptr;
+        if(!head->next) return head;
+        
+        ListNode* nex=head->next;   
+        head->next=swapPairs(nex->next);   //a位指向后续单元 
+        nex->next=head;   //b位指向a位 
+        return nex;      //返回的是b位 
+    }
+};
