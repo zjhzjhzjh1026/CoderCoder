@@ -13,12 +13,12 @@ public:
         int left=0,right=1;
         while(right<len){
             if(nums[right]>nums[left])
-              swap(nums,++left,right);
+              swap(nums,++left,right);   //这里只需nums[++left]=nums[right]即可 
             right++;
         }
         return left+1;
     }
-    void swap(vector<int>& nums,int a,int b){
+    void swap(vector<int>& nums,int a,int b){     //这个swap完全可以删掉！！因为不管超出长度的是什么。32ms，43.33% 
         int tmp;
         tmp=nums[a];
         nums[a]=nums[b];
