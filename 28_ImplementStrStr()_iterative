@@ -1,0 +1,26 @@
+/*********************************************************************************
+  *FileName:28_ImplementStrStr()_iterative 
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.29
+  4ms, beats 30.74% 
+**********************************************************************************/
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        int len1=haystack.size(),len2=needle.size(),start=0;
+        if(len2==0) return 0;
+        while(start<len1-len2+1){  //以每个字母为开头的词试是否match 
+            int idx=0;
+            while(idx<len2){
+                if(haystack[idx+start]==needle[idx])  //相同前移继续比较，否则跳出 
+                  idx++;
+                else break;  
+            }
+            if(idx==len2)
+               return start;
+            start++;
+        }
+        return -1;
+    }
+};
