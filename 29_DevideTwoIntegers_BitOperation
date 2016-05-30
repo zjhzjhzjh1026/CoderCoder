@@ -1,0 +1,31 @@
+/*********************************************************************************
+  *FileName:29_DevideTwoIntegers_BitOperation
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.5.30
+  8ms, beats 50.6%
+**********************************************************************************/
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(!divisor||dividend==INT_MIN&&divisor==-1)
+          return INT_MAX;
+        bool flag;
+        if(dividend<0&&divisor<0||dividend>0&&divisor>0)
+          flag=true;
+        else flag=false;
+        long long dend=abs((long long)dividend);//比直接labs快了4ms 
+        long long sor=abs((long long)divisor);
+        int res=0;
+        while(dend>=sor){      //整体的拆分思想例如3除19：19=3*4+3*2+1 
+            long long ord=sor,tmp=1;
+            while(dend>=(ord<<1)){
+                ord<<=1;    //注意是<<= 
+                tmp<<=1;
+            }        
+            dend-=ord;
+            res+=tmp;
+        }
+        return flag?res:-res;
+    }
+};
