@@ -3,7 +3,7 @@
   *Author:  Javan_Z
   *Version: 2.0
   *Date:  2016.5.30
-  8ms, beats 50.6%
+  8ms, beats 50.6%, O((logN)^2)
 **********************************************************************************/
 class Solution {
 public:
