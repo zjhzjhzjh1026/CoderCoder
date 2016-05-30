@@ -1,0 +1,27 @@
+/*********************************************************************************
+  *FileName:29_DevideTwoIntegers_BruteForceTLE 
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.5.30
+  Brute, Force.TLE 
+**********************************************************************************/
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(dividend==INT_MIN&&divisor==-1) return INT_MAX;//测试输入INT_MIN有些问题，，实例必须直接输入-2147483648
+        if(divisor==0) return INT_MAX;
+        int res=0,count=0;
+        bool flag;
+        if(dividend>0&&divisor>0||dividend<0&&divisor<0) 
+          flag=true;
+        else flag=false;
+        dividend=abs(dividend);
+        divisor=abs(divisor);
+        
+        while(res<=dividend){
+            res+=divisor;
+            count++;
+        }
+        return flag?count-1:-(count-1);
+    }
+};
