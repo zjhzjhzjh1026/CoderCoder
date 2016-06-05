@@ -19,7 +19,7 @@ public:
         int i=nums.size()-1,right=nums[i],mark=i;
         while(i>0){     
             if(nums[i-1]<nums[i]){   //递增规律消失之时 
-                while(nums[i-1]>=nums[mark])  //找到合适的交换位置 
+                while(nums[i-1]>=nums[mark])  //找到合适的交换位置,也可以用upper_bound来找
                   mark--;
                 int temp=nums[mark];  
                 nums[mark]=nums[i-1];
