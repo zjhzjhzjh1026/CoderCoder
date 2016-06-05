@@ -3,7 +3,7 @@
   *Author:  Javan_Z
   *Version: 2.0
   *Date:  2016.6.4
-  52ms, beats 81.82%
+  52ms, beats 81.82%，O(s_len*len)
 **********************************************************************************/
 class Solution {
 public:
@@ -14,18 +14,18 @@ public:
         for(int i=0;i<num;i++)    //words组成的计数君 
           count[words[i]]++;
           
-        for(int i=0;i<len;i++){   //大循环words[0]的长度len次 
+        for(int i=0;i<len;i++){   //大循环words[0]的长度len次      O(len)
             int left=i,sign=0;
             unordered_map<string,int> match;
-            for(int j=i;j<=s_len-len;j+=len){
-                string str=s.substr(j,len);
+            for(int j=i;j<=s_len-len;j+=len){     //O(s_len/len)
+                string str=s.substr(j,len);       //substr的复杂度O(len)
                 if(count.count(str)){
                     match[str]++;
                     if(match[str]<=count[str])  //次数为超过，则表示可继续进行匹配 
                       sign++;
                     else{
                         while(match[str]>count[str]){  //次数超过了要求最大数，则将left标志位右移len位，直到不再大于 
-                            string str_t=s.substr(left,len);
+                            string str_t=s.substr(left,len);    
                             match[str_t]--;
                             if(match[str_t]<count[str_t])
                               sign--;
