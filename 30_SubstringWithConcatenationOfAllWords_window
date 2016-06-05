@@ -1,0 +1,51 @@
+/*********************************************************************************
+  *FileName:30**_SubstringWithConcatenationOfAllWords_window 
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.6.4
+  52ms, beats 81.82%
+**********************************************************************************/
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        int s_len=s.size(),num=words.size(),len=words[0].size();
+        vector<int> res;
+        unordered_map<string,int> count;
+        for(int i=0;i<num;i++)    //words组成的计数君 
+          count[words[i]]++;
+          
+        for(int i=0;i<len;i++){   //大循环words[0]的长度len次 
+            int left=i,sign=0;
+            unordered_map<string,int> match;
+            for(int j=i;j<=s_len-len;j+=len){
+                string str=s.substr(j,len);
+                if(count.count(str)){
+                    match[str]++;
+                    if(match[str]<=count[str])  //次数为超过，则表示可继续进行匹配 
+                      sign++;
+                    else{
+                        while(match[str]>count[str]){  //次数超过了要求最大数，则将left标志位右移len位，直到不再大于 
+                            string str_t=s.substr(left,len);
+                            match[str_t]--;
+                            if(match[str_t]<count[str_t])
+                              sign--;
+                            left+=len;
+                        }
+                    }
+                    if(sign==num){    //匹配成功，输出结果，并将left右移一档继续匹配 
+                        res.push_back(left);
+                        match[s.substr(left,len)]--;
+                        sign--;
+                        left+=len;
+                    }
+                }
+                else{      //如果没有当前的单词，则证明之前的匹配的都是无用功，清空，继续从下一档的left开始匹配 
+                    sign=0;
+                    match.clear();
+                    left=j+len;
+                }
+            }
+        }
+        return res;
+    }
+};
