@@ -1,0 +1,27 @@
+/*********************************************************************************
+  *FileName:31_NextPermutation
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.6.5
+  12ms, beats 23.36%, fastest 
+**********************************************************************************/
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int i=nums.size()-1,right=nums[i],mark=i;
+        while(i>0){     
+            if(nums[i-1]<nums[i]){   //递增规律消失之时 
+                while(nums[i-1]>=nums[mark])  //找到合适的交换位置 
+                  mark--;
+                int temp=nums[mark];  
+                nums[mark]=nums[i-1];
+                nums[i-1]=temp;
+                sort(nums.begin()+i,nums.end());  //对交换完右边的部分进行排序，以得到最小数 
+                break;
+            }
+            i--;
+        }
+        if(!i)
+          reverse(nums.begin(),nums.end());  //当已是最大数时逆序 
+    }
+};
