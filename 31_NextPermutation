@@ -4,6 +4,14 @@
   *Version: 1.0
   *Date:  2016.6.5
   12ms, beats 23.36%, fastest 
+  idea：
+    Step1: Travel from the end of the array to find out the first "i" satisfying nums[i-1]<nums[i];
+    Step2: Find the suitable element to swap with the "i" above, that is the smallest digit bigger 
+           than nums[i-1], and swap them;
+    Step3: To make the new number smallest, we should sort the rest of the array in ascending order,
+           which sort function solve it well;
+    Step4: If the original number is already shown as ascending order, just check if i equals 0, and
+           reverse it~! 
 **********************************************************************************/
 class Solution {
 public:
