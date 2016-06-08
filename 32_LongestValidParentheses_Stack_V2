@@ -1,0 +1,25 @@
+/*********************************************************************************
+  *FileName:32_LongestValidParentheses_Stack_V2
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.6.8
+  12ms, beats 19.90% 
+**********************************************************************************/
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        stack<int> rec;
+        rec.push(-1);  //探测是否为空 
+        int res=0;
+        for(int i=0;i<s.size();i++){
+            int top=rec.top();
+            if(top!=-1&&s[i]==')'&&s[top]=='('){
+                rec.pop();
+                res=max(res,i-rec.top());  //注意是减去前一个无法匹配的位置，而不是top这个匹配成功的位置 
+            }
+            else
+              rec.push(i);
+        }
+        return res;
+    }
+};
