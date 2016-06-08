@@ -1,0 +1,36 @@
+/*********************************************************************************
+  *FileName:32_LongestValidParentheses_Stack
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.6.8
+  12ms, beats 19.90% 
+**********************************************************************************/
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        stack<int> rec;  //注意记录的是i不是字符 
+        int len=s.size(),res=0;
+        for(int i=0;i<len;i++){
+            if(s[i]=='(')
+              rec.push(i);
+            else{
+                if(!rec.empty()&&s[rec.top()]=='(')
+                  rec.pop();
+                else
+                  rec.push(i);
+            }
+        }     //最后rec中是所有不能匹配的字符的下标 
+        if(rec.empty())  //为空，则全部匹配成功 
+          return len;
+        int a=0,b=len;   //记得考虑尾=len和首=0这两种情况，因为它们是不存在于栈中的 
+        while(!rec.empty()){
+            a=rec.top();
+            rec.pop();
+          //  cout<<b<<a<<endl;
+            res=max(res,b-a-1);
+            b=a;
+        }
+        res=max(res,b);  //首=0 
+        return res;
+    }
+};
