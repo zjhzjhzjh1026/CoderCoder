@@ -1,0 +1,21 @@
+/*********************************************************************************
+  *FileName:32_LongestValidParentheses_DP
+  *Author:  Javan_Z
+  *Version: 3.0
+  *Date:  2016.6.8
+  8ms, beats 61.90% 
+**********************************************************************************/
+class Solution {    //思路，s[i]是以第i结尾的最长valid，它也就等于s[i-1]再加上s[i-1]这段之前的那位是否是'('匹配，以及需要加上可能导致的                   // 
+public:             //胶水效应，使得 dp[i-dp[i-1]-2]这段也被粘合起来 
+    int longestValidParentheses(string s) {
+        if(s.size()<=1)  return 0;
+        int maxCur=0;
+        vector<int> dp(s.size(),0);
+        for(int i=1;i<s.size();i++){
+            if(s[i]==')'&&s[i-dp[i-1]-1]=='('&&i-dp[i-1]-1>=0)  
+              dp[i]=dp[i-1]+2+((i-dp[i-1]-2>=0)?dp[i-dp[i-1]-2]:0);
+              maxCur=max(maxCur,dp[i]);
+        }
+        return maxCur;
+    }
+};
