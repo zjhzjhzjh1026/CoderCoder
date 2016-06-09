@@ -1,5 +1,5 @@
 /*********************************************************************************
-  *FileName:33_SearchinRotatedSortedArray_RevisedBinarySearch 
+  *FileName:33_SearchinRotatedSortedArray_RevisedBinarySearch_includingRecursive 
   *Author:  Javan_Z
   *Version: 1.0
   *Date:  2016.6.8
@@ -32,3 +32,30 @@ public:
           return -1;
     }
 };
+/*class Solution {   //recursive coding
+public:
+    int search(vector<int>& nums, int target) {
+        int left=0,right=nums.size()-1,mid;
+        return recur(nums,target,left,right);
+        } 
+    int recur(vector<int>& nums, int target, int left, int right){
+        if(left==right)
+          return (target==nums[left])?left:-1;
+        int mid=(left+right)/2;
+        if(nums[mid]==target)
+            return mid;  
+        if(nums[left]<=nums[mid]){
+                if(target<nums[mid]&&target>=nums[left])
+                  return recur(nums,target,left,mid-1);
+                else
+                  return recur(nums,target,mid+1,right);
+            }
+         else{
+                if(target>nums[mid]&&target<nums[left])
+                  return recur(nums,target,mid+1,right);
+                else 
+                  return recur(nums,target,left,mid-1);
+            }
+            
+    }
+};*/
