@@ -1,0 +1,47 @@
+/*********************************************************************************
+  *FileName:36_ValidSudoku_bruteForcewithHash
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.6.14
+  20ms, beats 26.20%，use unordered_map to do valid_check 
+**********************************************************************************/
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {   
+        unordered_map<char,int> check,check2;
+        for(int i=0;i<9;i++){       //check horizontally & vertically 
+            for(int j=0;j<9;j++){
+              if(board[i][j]!='.'){
+                 if(check.count(board[i][j]))
+                   return false;
+                 else
+                    check.insert(unordered_map<char,int>::value_type(board[i][j],1));
+              }
+              if(board[j][i]!='.'){
+                 if(check2.count(board[j][i]))
+                   return false;
+                 else
+                    check2.insert(unordered_map<char,int>::value_type(board[j][i],1));
+              }
+           }
+           check.clear();
+           check2.clear();
+        }
+        for(int i=0;i<3;i++){     //to check every subsquare 
+            for(int j=0;j<3;j++){
+              for(int k=0;k<3;k++)
+                for(int l=0;l<3;l++){
+                    //cout<<k+i*3<<l+j*3<<endl;
+                  if(board[k+i*3][l+j*3]!='.'){
+                   if(check.count(board[k+i*3][l+j*3]))
+                     return false;
+                   else
+                     check.insert(unordered_map<char,int>::value_type(board[k+i*3][l+j*3],1));
+                  }  
+                }
+                check.clear();
+            }            
+        }
+        return true;
+    }
+};
