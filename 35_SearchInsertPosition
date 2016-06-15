@@ -1,0 +1,26 @@
+/*********************************************************************************
+  *FileName:35_SearchInsertPosition 
+  *Author:  Javan_Z
+  *Version: 1.0
+  *Date:  2016.6.14
+  8ms, beats 15.83%  O(logN), fastest 
+**********************************************************************************/
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+       int i=0,j=nums.size()-1;
+       while(i<j){
+           int mid=(i+j)/2;
+           if(target==nums[mid])
+             return mid;
+           else if(nums[mid]<target)
+             i=mid+1;
+           else j=mid-1;
+       }
+      //cout<<i;
+       if(target>nums[i])  //右边界情况插右边 
+        return i+1;
+       else
+       return i;
+    }
+};
