@@ -1,0 +1,34 @@
+/*********************************************************************************
+  *FileName:34_SearchForARange_O(logn)
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.6.16
+  12ms, beats 18.91%  O(logN), double binary searches to find the left boundary and right boudary respectively. 
+**********************************************************************************/
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> res(2,-1);
+        int i=0,j=nums.size()-1;
+        while(i<j){  //find left boundary
+            int mid=(i+j)/2; 
+            if(nums[mid]<target) 
+              i=mid+1;
+            else   //merged by 2 cases, 1:nums[mid]==tar j=mid;2:nums[mid]>tar j=mid-1 
+              j=mid;
+        }
+        if(target==nums[i])
+          res[0]=i;
+        else return res;
+        i=0,j=nums.size()-1;
+        while(i<j){       //find right boundary
+            int mid=(i+j)/2+1;  //towards right 
+            if(nums[mid]>target)
+              j=mid-1;
+            else 
+              i=mid;
+        }
+        res[1]=i;
+        return res;
+    }
+};
