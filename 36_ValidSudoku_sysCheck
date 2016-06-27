@@ -1,0 +1,23 @@
+/*********************************************************************************
+  *FileName:36_ValidSudoku_sysCheck 
+  *Author:  Javan_Z
+  *Version: 2.0
+  *Date:  2016.6.27
+  12ms, beats 61.23%，O（N^2） 
+**********************************************************************************/
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        int sys1[9][9]={0},sys2[9][9]={0},sys3[9][9]={0};  //三个数组分别用于存储三方面检验标志位 
+        for(int i=0;i<board.size();i++)
+          for(int j=0;j<board[0].size();j++){
+             if(board[i][j]!='.'){
+                 int n=board[i][j]-'0'-1,k=i/3*3+j/3;  //注意k在处理九宫格检验 
+                 if(sys1[i][n]||sys2[j][n]||sys3[k][n])
+                    return false;
+                else sys1[i][n]=sys2[j][n]=sys3[k][n]=1;  //设置已被占用标志位 
+             } 
+          }
+          return true;
+    }
+};
