@@ -1,4 +1,4 @@
-/*This is an imitative version of the DFS/BackTracking solution, and reaches 0ms*/
+/*This is an imitative version of the DFS/BackTracking solution, and the running time is 0ms*/
 class Solution {
     struct cell
     {
