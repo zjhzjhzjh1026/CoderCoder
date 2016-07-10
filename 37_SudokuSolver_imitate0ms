@@ -1,6 +1,6 @@
 /*This is an imitative version of the DFS/BackTracking solution, and the running time is 0ms*/
 class Solution {
-    struct cell
+    struct cell  //每个单元格封装
     {
         int value;
         int numPossibilities;
@@ -10,7 +10,7 @@ class Solution {
     };
     array<array<cell,9>,9> cells;
     
-    bool set(int i,int j,int v){
+    bool set(int i,int j,int v){   //设定某个单元格的值，并在网络中更新限制
         cell& c=cells[i][j];
         if(c.value==v)
            return true;
@@ -25,7 +25,7 @@ class Solution {
               return false;
             if(j!=k&&!updateConstraints(i,k,v))
               return false;
-            int ii=i/3*3+k/3;   //九宫格其他八个位置算法
+            int ii=i/3*3+k/3;       //九宫格其他八个位置算法
             int jj=j/3*3+k%3;
             if(ii!=i&&jj!=j&&!updateConstraints(ii,jj,v))
               return false;
@@ -33,24 +33,24 @@ class Solution {
         return true;
     }
     
-    bool updateConstraints(int i,int j,int excludedValue){
+    bool updateConstraints(int i,int j,int excludedValue){  //更新限制的函数
         cell& c=cells[i][j];
         if(c.constraints[excludedValue])
           return true;
         if(c.value==excludedValue)
           return false;
         c.constraints.set(excludedValue);
-        if(--c.numPossibilities>1) //排除后并不能产生确定的结果就直接返回
+        if(--c.numPossibilities>1)   //排除后并不能产生确定的结果就直接返回
           return true;
         for(int k=1;k<=9;k++)
-          if(!c.constraints[k]) //某些空只有唯一的可选值了
+          if(!c.constraints[k])   //某些空只有唯一的可选值了
             return set(i,j,k);
             
         assert(false);
     }
      vector<pair<int,int>> bt;
      
-     bool findEmptyCells(){
+     bool findEmptyCells(){    //在搜索完后找出还未确定的单元格，放入vector中，并按照可能的值的多少排序
         bt.clear();
         for(int i=0;i<9;i++)
           for(int j=0;j<9;j++){
@@ -63,7 +63,7 @@ class Solution {
           return backTrack(0);
      }
      
-     bool backTrack(int k){
+     bool backTrack(int k){     //最后将vector中的各个空格用回溯法解出
          if(k>=bt.size())
            return true;
         int i = bt[k].first;
@@ -72,7 +72,7 @@ class Solution {
 		if (cells[i][j].value)
 			return backTrack(k + 1);
 	    auto constraints=cells[i][j].constraints;
-	    array<array<cell,9>,9> snapshot(cells);
+	    array<array<cell,9>,9> snapshot(cells); //这里因为BT的层数低数据量小，所以通过snapshot恢复快于undo上一步操作
 	    for(int v=1;v<=9;v++){
 	        if(!constraints[v]){
 	            if(set(i,j,v)){
@@ -93,8 +93,8 @@ public:
        for(int j=0;j<9;j++){
            if(board[i][j]!='.'&&!set(i,j,board[i][j]-'0'))
              return;
-       }
-
+       }   
+     //确定第一轮填写完成后是否还有无法确定的cell
        if(!findEmptyCells())
          return;
        for(int i=0;i<9;i++)
