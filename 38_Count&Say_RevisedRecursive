@@ -1,0 +1,30 @@
+/*********************************************************************************
+*FileName:38_Count&Say_RevisedRecursive
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.7.13
+0ms, beats 74.38%，fastest
+The improved solution using recursive thought.
+**********************************************************************************/
+class Solution {
+public:
+	string countAndSay(int n) {
+		if (1 == n) return "1";
+		if (2 == n) return "11";
+		string result = countAndSay(n - 1), ans = "";
+		int count = 1, i;
+		for (i = 1; result[i]; i++) {
+			if (result[i - 1] == result[i]) {
+				count++;
+			}
+			else {
+				ans.push_back(count + '0');
+				ans.push_back(result[i - 1]);
+				count = 1;
+			}
+		}
+		ans.push_back(count + '0');
+		ans.push_back(result[i - 1]);
+		return ans;
+	}
+};
