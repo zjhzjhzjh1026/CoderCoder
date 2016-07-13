@@ -1,0 +1,39 @@
+/*********************************************************************************
+*FileName:37_Count&Say_StraightforwardRecursive
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.13
+4ms, beats 27.19%
+The very straight-forward way to solve the problem
+**********************************************************************************/
+class Solution {
+public:
+	string countAndSay(int n) {   
+		string rec = "1";
+		int i = 0;
+		while (++i<n) {
+			rec = recur(rec);   //recall the recursive function
+		}
+		return rec;
+	}
+	string recur(string temp) {    //recursive function
+		char pre = temp[0];
+		int count = 1;
+		string ans = "";
+		for (int i = 1; temp[i]; i++) {
+			if (pre == temp[i]) {
+				count++;
+
+			}
+			else {
+				char coun = count + '0';
+				ans = ans + coun + pre;
+				count = 1;
+				pre = temp[i];
+			}
+		}
+		char coun = count + '0';
+		ans = ans + coun + pre;
+		return ans;
+	}
+};
