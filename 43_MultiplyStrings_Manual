@@ -1,0 +1,28 @@
+/*********************************************************************************
+*FileName:43_MultiplyStrings_Manual
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.16
+8ms, beats 60.62%
+Use the manual way to compute the result
+**********************************************************************************/
+class Solution {
+public:
+	string multiply(string num1, string num2) {
+		int len1 = num1.size(), len2 = num2.size();
+		string ans(len1 + len2, '0');
+		for (int i = len1 - 1; i >= 0; i--) {
+			int carry = 0;
+			for (int j = len2 - 1; j >= 0; j--) {
+				int temp = ans[i + j + 1] - '0' + (num1[i] - '0')*(num2[j] - '0') + carry; 
+				ans[i + j + 1] = temp % 10 + '0';
+				carry = temp / 10;        //进位
+			}
+			ans[i] += carry;     //每次乘完乘数后把最高位记录进去，比如9*9，如果没这步的话只有1被记录了
+		}
+		long long strpos = ans.find_first_not_of("0");  //去掉头部多余的0串
+		if (string::npos != strpos)
+			return ans.substr(strpos);  
+		return "0";    //全为0
+	}
+};
