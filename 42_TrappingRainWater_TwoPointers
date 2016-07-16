@@ -5,7 +5,7 @@
 *Date:  2016.7.16
 8ms, beats 38.80%
 Use left&right pointers to record the lower and compare with the current level, and add it to the whole water of container
-instead of using width*height
+instead of using width*height  (The math principles are not clearly understood！！！！！！keep thinking！！)
 **********************************************************************************/
 class Solution {
 public:
