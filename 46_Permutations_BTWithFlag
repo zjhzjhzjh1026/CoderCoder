@@ -22,10 +22,10 @@ public:
 		}
 		for (int i = 0; i<nums.size(); i++) {
 			if (flag[i]) continue;   //element used,,skip
-			combination.push_back(nums[i]);
+			combination.push_back(nums[i]);  //push&flag true
 			flag[i] = true;
 			backtracking(nums, ans, combination, flag);
-			flag[i] = false;
+			flag[i] = false;                 //pop&flag false
 			combination.pop_back();
 		}
 	}
