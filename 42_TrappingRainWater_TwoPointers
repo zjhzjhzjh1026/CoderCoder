@@ -1,0 +1,21 @@
+/*********************************************************************************
+*FileName:42_TrappingRainWater_TwoPointers
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.16
+8ms, beats 38.80%
+Use left&right pointers to record the lower and compare with the current level, and add it to the whole water of container
+instead of using width*height
+**********************************************************************************/
+class Solution {
+public:
+	int trap(vector<int>& height) {
+		int left = 0, right = height.size() - 1, level = 0, water = 0;
+		while (left<right) {
+			int low = height[height[left]<height[right] ? left++ : right--];
+			level = max(level, low);
+			water += (level - low);
+		}
+		return water;
+	}
+};
