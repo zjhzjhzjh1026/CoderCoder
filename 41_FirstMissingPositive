@@ -1,0 +1,24 @@
+/*********************************************************************************
+*FileName:41_FirstMissingPositive
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.16
+4ms, beats 6.74%
+Put A[i] to the place it belongs（the place of A[A[i]-1]）
+**********************************************************************************/
+class Solution {
+public:
+	int firstMissingPositive(vector<int>& nums) {
+		int len = nums.size();
+		for (int i = 0; i<len; i++) {
+			while (nums[i]>0 && nums[i]<len&&nums[nums[i] - 1] != nums[i])  //最后一个条件是换位后新元素继续测试是否需要交换
+				swap(nums[i], nums[nums[i] - 1]);
+		}
+		for (int i = 0; i<len; i++) {
+			if (i + 1 != nums[i])
+				return i + 1;
+		}
+		return len + 1;
+
+	}
+};
