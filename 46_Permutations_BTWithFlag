@@ -1,0 +1,32 @@
+/*********************************************************************************
+*FileName:46_Permutations_BTWithFlag
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.7.16
+16ms, beats 25.86%
+BackTracking with Flag.
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<int>> permute(vector<int>& nums) {
+		vector<vector<int>> ans;
+		vector<int> combination;
+		vector<bool> flag(nums.size(), false); //record the status of every element
+		backtracking(nums, ans, combination, flag);
+		return ans;
+	}
+	void backtracking(vector<int>& nums, vector<vector<int>>& ans, vector<int>& combination, vector<bool>& flag) {
+		if (combination.size() == nums.size()) {
+			ans.push_back(combination);
+			return;
+		}
+		for (int i = 0; i<nums.size(); i++) {
+			if (flag[i]) continue;   //element used,,skip
+			combination.push_back(nums[i]);
+			flag[i] = true;
+			backtracking(nums, ans, combination, flag);
+			flag[i] = false;
+			combination.pop_back();
+		}
+	}
+};
