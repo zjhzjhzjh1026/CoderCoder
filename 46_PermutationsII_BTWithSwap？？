@@ -1,0 +1,30 @@
+/*********************************************************************************
+*FileName:46_PermutationsII_BTWithSwap？？
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.16
+72ms, beats 4.76%
+BackTracking with swap，，strange backtracking
+**********************************************************************************/
+class Solution {    //未理解
+public:
+	vector<vector<int>> permuteUnique(vector<int>& nums) {
+		sort(nums.begin(), nums.end());
+		vector<vector<int>> ans;
+		backtracking(nums, 0, nums.size(), ans);
+		return ans;
+	}
+	void backtracking(vector<int> nums, int i, int j, vector<vector<int>>& ans) { //这个地方nums没有& 引用地址？？
+		cout << i << endl;
+		if (i == j - 1) {
+			ans.push_back(nums);
+			return;
+		}
+		for (int k = i; k<j; k++) {
+			if (k != i && nums[k] == nums[i]) continue;
+			swap(nums[k], nums[i]);
+			backtracking(nums, i + 1, j, ans);
+			// swap(nums[k],nums[i]);             //这里无需换回？？
+		}
+	}
+};
