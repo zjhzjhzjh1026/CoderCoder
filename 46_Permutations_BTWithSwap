@@ -1,0 +1,27 @@
+/*********************************************************************************
+*FileName:46_Permutations_BTWithSwap
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.16
+16ms, beats 25.86%
+BackTracking with swap.
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<int>> permute(vector<int>& nums) {
+		vector<vector<int>> ans;
+		backtracking(nums, ans, 0);
+		return ans;
+	}
+	void backtracking(vector<int>& nums, vector<vector<int>>& ans, int front) {
+		if (front == nums.size()) {
+			ans.push_back(nums);
+			return;
+		}
+		for (int i = front; i<nums.size(); i++) {
+			swap(nums[i], nums[front]);
+			backtracking(nums, ans, front + 1);
+			swap(nums[i], nums[front]);
+		}
+	}
+};
