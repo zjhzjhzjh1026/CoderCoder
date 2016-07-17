@@ -6,7 +6,7 @@
 72ms, beats 4.76%(32ms, 49.19%)
 BackTracking with swap，，strange backtracking
 **********************************************************************************/
-class Solution {    //未理解
+class Solution {    
 public:
 	vector<vector<int>> permuteUnique(vector<int>& nums) {
 		sort(nums.begin(), nums.end());
@@ -14,17 +14,18 @@ public:
 		backtracking(nums, 0, nums.size(), ans);
 		return ans;
 	}
-	void backtracking(vector<int> nums, int i, int j, vector<vector<int>>& ans) { //这个地方nums没有& 引用地址？？
+	void backtracking(vector<int> nums, int i, int j, vector<vector<int>>& ans) { //这个地方nums没有&引用地址！！！！
 		cout << i << endl;
-		if (i == j - 1) {
+		if (i == j - 1) {        //最后一位只能跟自己交换，所以其实到j-1的时候就可以push进ans了
 			ans.push_back(nums);
 			return;
 		}
 		for (int k = i; k<j; k++) {
 			if (k != i && nums[k] == nums[i]) continue;
-			swap(nums[k], nums[i]);
+			swap(nums[k], nums[i]);                
 			backtracking(nums, i + 1, j, ans);
-			// swap(nums[k],nums[i]);             //这里无需换回？？
+			// swap(nums[k],nums[i]);             //这里无需换回，这里的两步有一种类似A换B，B换C的车轮感觉，比如【1 2 3】在第一次处于0阶的时候是1，第二次
+			                                      //最初是1然后和2交换，则第三次处于0阶的初始状态是2，而不是1！！！！！！
 		}
 	}
 };
@@ -32,23 +33,23 @@ public:
 /**************Revised, same thought,but 32ms, 49.19%************************
 class Solution {
 public:
-    vector<vector<int>> permuteUnique(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
-        vector<vector<int>> ans;
-        int len=nums.size();
-        backtracking(nums,ans,0,len);
-        return ans;
-    }
-    void backtracking(vector<int> nums,vector<vector<int>>& ans,int front,int len){
-         if(front==len){
-             ans.push_back(nums);
-             return;
-         }
-         for(int i=front;i<len;i++){
-             if(nums[i]==nums[front]&&i!=front) continue;
-             swap(nums[i],nums[front]);
-             backtracking(nums,ans,front+1,len);
-         }
-    }
+vector<vector<int>> permuteUnique(vector<int>& nums) {
+sort(nums.begin(),nums.end());
+vector<vector<int>> ans;
+int len=nums.size();
+backtracking(nums,ans,0,len);
+return ans;
+}
+void backtracking(vector<int> nums,vector<vector<int>>& ans,int front,int len){
+if(front==len){
+ans.push_back(nums);
+return;
+}
+for(int i=front;i<len;i++){
+if(nums[i]==nums[front]&&i!=front) continue;
+swap(nums[i],nums[front]);
+backtracking(nums,ans,front+1,len);
+}
+}
 };
 */
