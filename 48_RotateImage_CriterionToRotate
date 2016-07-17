@@ -3,7 +3,7 @@
 *Author:  Javan_Z
 *Version: 2.0
 *Date:  2016.7.17
-4ms, beats 18.64%,fastest
+4ms, beats 18.64%,fastest,Space O(1)
 Clockwise rotate:step1.reverse the upside down;2.swap the symmetry
  e.g. * 1 2 3     7 8 9     7 4 1
       * 4 5 6  => 4 5 6  => 8 5 2
