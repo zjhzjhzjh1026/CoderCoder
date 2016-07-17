@@ -3,7 +3,7 @@
 *Author:  Javan_Z
 *Version: 1.0
 *Date:  2016.7.16
-72ms, beats 4.76%
+72ms, beats 4.76%(32ms, 49.19%)
 BackTracking with swap，，strange backtracking
 **********************************************************************************/
 class Solution {    //未理解
@@ -28,3 +28,27 @@ public:
 		}
 	}
 };
+
+/**************Revised, same thought,but 32ms, 49.19%************************
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        int len=nums.size();
+        backtracking(nums,ans,0,len);
+        return ans;
+    }
+    void backtracking(vector<int> nums,vector<vector<int>>& ans,int front,int len){
+         if(front==len){
+             ans.push_back(nums);
+             return;
+         }
+         for(int i=front;i<len;i++){
+             if(nums[i]==nums[front]&&i!=front) continue;
+             swap(nums[i],nums[front]);
+             backtracking(nums,ans,front+1,len);
+         }
+    }
+};
+*/
