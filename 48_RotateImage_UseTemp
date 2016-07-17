@@ -1,0 +1,24 @@
+/*********************************************************************************
+*FileName:48_RotateImage_UseTemp
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.17
+4ms, beats 18.64%,fastest
+Use a 2-d array temp to convert row to column，Space O(N^2)
+**********************************************************************************/
+class Solution {   //我们发现顺时间旋转的过程就是把行变换为列
+public:
+	void rotate(vector<vector<int>>& matrix) {
+		int n = matrix.size();
+		vector<vector<int>> tmp(n, vector<int>(n));  
+		for (int i = 0; i<n; i++)
+			for (int j = 0; j<n; j++) {
+				tmp[j][n - i - 1] = matrix[i][j];   //把temp每行数据存入tmp的列中
+			}
+		for (int i = 0; i<n; i++)
+			for (int j = 0; j<n; j++) {
+				matrix[i][j] = tmp[i][j];
+			}
+		return;
+	}
+};
