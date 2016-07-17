@@ -1,0 +1,27 @@
+/*********************************************************************************
+*FileName:48_RotateImage_CriterionToRotate
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.7.17
+4ms, beats 18.64%,fastest
+Clockwise rotate:step1.reverse the upside down;2.swap the symmetry
+ e.g. * 1 2 3     7 8 9     7 4 1
+      * 4 5 6  => 4 5 6  => 8 5 2
+      * 7 8 9     1 2 3     9 6 3
+
+Anticlockwise rotate:step1.reverse the left to right;2.swap the symmetry
+e.g. * 1 2 3     3 2 1     3 6 9
+     * 4 5 6  => 6 5 4  => 2 5 8
+     * 7 8 9     9 8 7     1 4 7
+**********************************************************************************/
+class Solution {
+public:
+	void rotate(vector<vector<int>>& matrix) {
+		int n = matrix.size();
+		reverse(matrix.begin(), matrix.end());
+		for (int i = 0; i<n; i++)
+			for (int j = i + 1; j<n; j++)
+				swap(matrix[i][j], matrix[j][i]);
+		return;
+	}
+};
