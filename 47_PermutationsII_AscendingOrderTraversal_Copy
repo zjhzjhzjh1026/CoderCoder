@@ -1,0 +1,45 @@
+/*********************************************************************************
+*FileName:47_PermutationsII_AscendingOrderTraversal_Copy
+*Author:  Javan_Z
+*Version: 0.0
+*Date:  2016.7.17
+32ms, beats 49.19%
+The main idea is to traverse by the ascending order, for example, 1134->1143->1341->…………
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<int> > permuteUnique(vector<int> &S) {
+		// res.clear();
+		sort(S.begin(), S.end());
+		res.push_back(S);
+		int j;
+		int i = S.size() - 1;
+		while (1) {
+			for (i = S.size() - 1; i>0; i--) {  //找到第一个大小下降位
+				if (S[i - 1]< S[i]) {
+					break;
+				}
+			}
+			if (i == 0) {
+				break;
+			}
+
+			for (j = S.size() - 1; j>i - 1; j--) {   //找到第一个大于之前下降后的位的位
+				if (S[j]>S[i - 1]) {
+					break;
+				}
+			}
+			swap(S[i - 1], S[j]);
+			reverse(S, i, S.size() - 1);
+			res.push_back(S);
+		}
+		return res;
+	}
+	void reverse(vector<int> &S, int s, int e) {
+		while (s<e) {
+			swap(S[s++], S[e--]);
+		}
+	}
+
+	vector<vector<int> > res;
+};
