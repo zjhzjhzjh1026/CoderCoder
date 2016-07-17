@@ -1,0 +1,36 @@
+/*********************************************************************************
+*FileName:47_PermutationsII_MapToMarkUsedOrNot
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.7.17
+32ms, beats 49.19%
+The map count record the times each element appears, and involve this record to do backtracking
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<int>> permuteUnique(vector<int>& nums) {
+		vector<int> combination;
+		vector<vector<int>> ans;
+		map<int, int> count;
+		for (int i : nums) {    //对于nums中每一个元素i迭代
+			if (count.find(i) == count.end()) count[i] = 0;   //没有出现过这个元素，则先添加
+			count[i]++;   //有之后直接++
+		}
+		backtracking(nums, combination, ans, count, nums.size());
+		return ans;
+	}
+	void backtracking(vector<int>& nums, vector<int>& com, vector<vector<int>>& ans, map<int, int>& count, int n) {
+		if (n <= 0) {
+			ans.push_back(com);
+			return;
+		}
+		for (auto &p : count) {
+			if (!p.second) continue;    //已经使用完的元素则跳过
+			com.push_back(p.first);     //常规BT中加入对Map的增减调整
+			p.second--;
+			backtracking(nums, com, ans, count, n - 1);
+			p.second++;
+			com.pop_back();
+		}
+	}
+};
