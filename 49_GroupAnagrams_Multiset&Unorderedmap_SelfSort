@@ -1,0 +1,40 @@
+/*********************************************************************************
+*FileName:49_GroupAnagrams_Multiset&Unorderedmap_SelfSort
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.7.20
+72ms, beats 56.90%
+Use the sorted string to be the key, store every group respetively in the hashtable.
+function "sort": O(nlogn)    self-write function: O(n)
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<string>> groupAnagrams(vector<string>& strs) {
+		unordered_map<string, multiset<string>> dev; //multiset is repeatable container set
+		for (string tmp : strs) {
+			string key = nsort(tmp);
+			//substitute the O(nlogn) 'sort' function with self-write O(n) one
+			dev[key].insert(tmp);
+		}
+		vector<vector<string>> ans;
+		for (auto p : dev) {
+			vector<string> com(p.second.begin(), p.second.end());
+			ans.push_back(com);
+		}
+		return ans;
+	}
+private:
+	string nsort(string tmp) {
+		int count[26] = { 0 }, n = tmp.size();
+		for (int i = 0; i<n; i++) {
+			count[tmp[i] - 'a']++;
+		}
+		int t = 0;
+		string ans(n, 'a');
+		for (int i = 0; i<26; i++)
+			for (int j = 0; j<count[i]; j++) {
+				ans[t++] += i;
+			}
+		return ans;
+	}
+};
