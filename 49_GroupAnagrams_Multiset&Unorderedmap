@@ -1,0 +1,25 @@
+/*********************************************************************************
+*FileName:49_GroupAnagrams_Multiset&Unorderedmap
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.20
+88ms, beats 23.69%
+Use the sorted string to be the key, store every group respetively in the hashtable.
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<string>> groupAnagrams(vector<string>& strs) {
+		unordered_map<string, multiset<string>> dev; //multiset is repeatable container set
+		for (string tmp : strs) {
+			string key = tmp;
+			sort(key.begin(), key.end());   //use the sorted string to be the key
+			dev[key].insert(tmp);
+		}
+		vector<vector<string>> ans;
+		for (auto p : dev) {
+			vector<string> com(p.second.begin(), p.second.end());
+			ans.push_back(com);
+		}
+		return ans;
+	}
+};
