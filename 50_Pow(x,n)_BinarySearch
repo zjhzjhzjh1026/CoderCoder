@@ -1,0 +1,28 @@
+/*********************************************************************************
+*FileName:50_Pow(x,n)_binary
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.21
+4ms, beats 21.76%, fastest
+binary search, bit operation
+**********************************************************************************/
+class Solution {
+public:
+	double myPow(double x, int n) {
+		unsigned long long tmp; //注意INT_MIN取绝对值后大于INT的范围
+		double ans = 1;
+		if (n>0)   //次幂正负
+			tmp = n;
+		else {
+			tmp = -n;
+			x = 1 / x;
+		}
+		while (tmp) {
+			if (tmp & 1)   //此二进制位不为0
+				ans *= x;
+			x *= x;  //x,x^2,x^4,x^8
+			tmp >>= 1;  //右移1位
+		}
+		return ans;
+	}
+};
