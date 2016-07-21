@@ -1,0 +1,32 @@
+/*********************************************************************************
+*FileName:50_Pow(x,n)_binary_Recursive
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.7.21
+4ms, beats 21.76%, fastest
+binary search, Recursive call
+**********************************************************************************/
+class Solution {
+public:
+	double myPow(double x, int n) {
+		if (!n) return 1;
+		double tmp = myPow(x, n / 2);
+		if (n % 2) {
+			return n>0 ? x*tmp*tmp : 1 / x*tmp*tmp;
+		}
+		else
+			return tmp*tmp;
+	}
+};
+
+/*  4-line Code:
+ class Solution {
+public:
+	double myPow(double x, int n) {
+	  if(!n) return 1;
+	  if(n==1) return x;
+	  if(n==-1) return 1/x;
+	  return myPow(x*x,n/2)*(n%2?(n>0?x:1/x):1);
+	}
+}; 
+*/
