@@ -1,0 +1,35 @@
+/*********************************************************************************
+*FileName:49_GroupAnagrams_PrimeNumberTrick
+*Author:  Javan_Z
+*Version: 3.0
+*Date:  2016.7.21
+52ms, beats 99.61%
+Use prime number to be the key of hashtable,
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<string>> groupAnagrams(vector<string>& strs) {
+		vector<int> prime = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103 };
+		vector<vector<string>> ans;
+		unordered_map<int, int> map;
+		for (string s : strs) {
+			int key = 1;
+			for (char c : s) {
+				key *= prime[c - 'a']; //compute the key of each group of anagrams.
+			}
+
+			if (map.find(key) != map.end()) {
+				vector<string>& t = ans[map[key]];  //注意取地址，不然是插不进原向量的
+				t.push_back(s);
+			}
+			else {
+				vector<string> t;
+				t.push_back(s);
+				ans.push_back(t);
+				map.insert(unordered_map<int, int>::value_type(key, ans.size() - 1)); //在hashtable中建立映射，方便在已有时找到对应vector的坐标
+			}
+
+		}
+		return ans;
+	}
+};
