@@ -4,7 +4,8 @@
 *Version: 3.0
 *Date:  2016.7.21
 52ms, beats 99.61%
-Use prime number to be the key of hashtable,
+Use prime number to be the key of hashtable,but this solution is easily brokendown in cases
+such as {"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab"}
 **********************************************************************************/
 class Solution {
 public:
