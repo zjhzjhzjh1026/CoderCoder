@@ -1,0 +1,21 @@
+/*********************************************************************************
+*FileName:53_MaxSubarray_Accumulation
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.7.22
+8ms, beats 75.19%
+The idea is to add every element one by one, and clear the sum when sum is below zero.
+**********************************************************************************/
+class Solution {
+public:
+	int maxSubArray(vector<int>& nums) {
+		int ans = nums[0], sum = 0, len = nums.size();
+		for (int i = 0; i<len; i++) {
+			sum += nums[i];
+			ans = max(ans, sum);
+			if (sum<0)    //clear the negative sum
+				sum = 0;
+		}
+		return ans;
+	}
+};
