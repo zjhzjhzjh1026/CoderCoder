@@ -1,0 +1,24 @@
+/*********************************************************************************
+*FileName:53_MaxSubarray_DP
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.7.22
+12ms, beats 11.01%
+dp[i] denotes the maxLength of the subarray ended up with nums[i].
+**********************************************************************************/
+class Solution {
+public:
+	int maxSubArray(vector<int>& nums) {
+		int len = nums.size();
+		if (!len) return 0;
+		int dp[len] = { 0 };
+		dp[0] = nums[0];   //不等于nums[0]>0?nums[0]:0！！因为必选
+		int maxSum = dp[0];
+
+		for (int i = 1; i<len; i++) {
+			dp[i] = nums[i] + (dp[i - 1]>0 ? dp[i - 1] : 0);  //recursive equation
+			maxSum = max(maxSum, dp[i]);
+		}
+		return maxSum;
+	}
+};
