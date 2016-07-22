@@ -1,0 +1,32 @@
+/*********************************************************************************
+*FileName:53_MaxSubarray_Devide&Conquer_Copy
+*Author:  Javan_Z
+*Version: 3.0
+*Date:  2016.7.22
+12ms, beats 11.01%
+It's a subtle devide&conquer solution!
+**********************************************************************************/
+class Solution {
+public:
+	int maxSubArray(vector<int>& nums) {
+		int len = nums.size();
+		if (!len) return 0;
+		int mx, lmx, rmx, sum;
+		maxSubArray(nums, 0, len - 1, mx, lmx, rmx, sum);
+		return mx;
+	}
+	void maxSubArray(vector<int>& nums, int l, int r, int& mx, int& lmx, int& rmx, int& sum) {
+		if (l == r)
+			mx = lmx = rmx = sum = nums[l];
+		else {
+			int mid = (l + r) / 2;
+			int mx1, lmx1, rmx1, sum1, mx2, lmx2, rmx2, sum2;
+			maxSubArray(nums, l, mid, mx1, lmx1, rmx1, sum1);
+			maxSubArray(nums, mid + 1, r, mx2, lmx2, rmx2, sum2);//将原问题对半拆开
+			mx = max(max(mx1, mx2), rmx1 + lmx2);
+			lmx = max(lmx1, sum1 + lmx2);
+			rmx = max(rmx2, rmx1 + sum2);
+			sum = sum1 + sum2;
+		}
+	}
+};
