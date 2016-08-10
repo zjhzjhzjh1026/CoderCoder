@@ -1,0 +1,34 @@
+/*********************************************************************************
+*FileName:54_SpiralMatrix
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.10
+0ms, beats 17.81%
+**********************************************************************************/
+class Solution {
+public:
+	vector<int> spiralOrder(vector<vector<int>>& matrix) {
+		vector<int> ans;
+		if (!matrix.size()) return ans;
+		int rowS = 0, rowE = matrix.size() - 1, columnS = 0, columnE = matrix[0].size() - 1;
+		while (rowS <= rowE&&columnS <= columnE) {
+			for (int i = columnS; i <= columnE; i++)  //traverse right
+				ans.push_back(matrix[rowS][i]);
+			rowS++;
+			for (int i = rowS; i <= rowE; i++)       //traverse down
+				ans.push_back(matrix[i][columnE]);
+			columnE--;
+			if (rowS <= rowE) {   //this is to certify row, not column
+				for (int i = columnE; i >= columnS; i--)  //traverse left
+					ans.push_back(matrix[rowE][i]);
+				rowE--;
+			}
+			if (columnS <= columnE) {
+				for (int i = rowE; i >= rowS; i--)  //traverse up
+					ans.push_back(matrix[i][columnS]);
+				columnS++;
+			}
+		}
+		return ans;
+	}
+};
