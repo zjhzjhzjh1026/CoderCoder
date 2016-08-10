@@ -1,0 +1,21 @@
+/*********************************************************************************
+*FileName:55_JumpGame_Self
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.10
+16ms, beats 17.90%
+**********************************************************************************/
+class Solution {
+public:
+	bool canJump(vector<int>& nums) {
+		int i = 0, len = nums.size(), maxPos = 0;
+		if (1 == len) return true;
+		while (i<len) {
+			if (!nums[i] && maxPos <= i) break;  //如果当前位置为0进位，且前位无法逾越它，则断，返回false
+			maxPos = max(i + nums[i], maxPos);   //更新当前最远位置
+			if (maxPos >= len - 1) return true;   //如果已有可到达末尾的情况，则通，返回true
+			i++;
+		}
+		return false;
+	}
+};
