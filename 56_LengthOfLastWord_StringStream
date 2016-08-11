@@ -1,0 +1,19 @@
+/*********************************************************************************
+*FileName:56_LengthOfLastWord_StringStream
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.8.11
+4ms, beats 5.48%
+**********************************************************************************/
+class Solution {
+public:
+	int lengthOfLastWord(string s) {
+		if (!s.size()) return 0;
+		istringstream istream(s);
+		string s1, s2;
+		while (istream >> s1) {
+			s2 = s1;
+		}
+		return s2.size();
+	}
+};
