@@ -1,0 +1,27 @@
+/*********************************************************************************
+*FileName:55_JumpGame_Check0
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.8.11
+16ms, beats 17.90%
+Check from every 0 to its left
+**********************************************************************************/
+class Solution {
+public:
+	bool canJump(vector<int>& nums) {
+		int len = nums.size();
+		if (1 == len)
+			return true;
+		for (int i = len - 2; i >= 0; i--) {
+			if (!nums[i]) {
+				int stepNeed = 1;
+				while (stepNeed>nums[i]) {   //每次往左退一格寻找能jump过去的i
+					stepNeed++;
+					i--;
+					if (i<0) return false;
+				}
+			}
+		}
+		return true;
+	}
+};
