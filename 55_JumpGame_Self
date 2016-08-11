@@ -19,3 +19,14 @@ public:
 		return false;
 	}
 };
+/********************************Clean  Code Version********************************************
+class Solution {
+public:
+bool canJump(vector<int>& nums) {
+int i,maxPos=0,len=nums.size();
+for(i=0;i<len&&i<=maxPos;i++)
+maxPos=max(maxPos,nums[i]+i);
+return i==len;
+}
+};
+*/
