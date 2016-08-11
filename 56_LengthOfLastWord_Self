@@ -10,6 +10,8 @@ public:
 	int lengthOfLastWord(string s) {
 		int len = s.size();
 		int i = len - 1, count = 0;
+	/*s.resize(s.find_last_not_of(" ")+1);   remove all spaces in the rear
+          return s.size()-s.find_last_of(" ")-1;*/
 		while (s[i] == ' '&&i >= 0) {   //count the number of space from the rear of given string
 			count++;
 			i--;
