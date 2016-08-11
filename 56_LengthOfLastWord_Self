@@ -1,0 +1,22 @@
+/*********************************************************************************
+*FileName:56_LengthOfLastWord_Self
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.11
+4ms, beats 5.48%
+**********************************************************************************/
+class Solution {
+public:
+	int lengthOfLastWord(string s) {
+		int len = s.size();
+		int i = len - 1, count = 0;
+		while (s[i] == ' '&&i >= 0) {   //count the number of space from the rear of given string
+			count++;
+			i--;
+		}
+		while (s[i] != ' '&&i >= 0) {   //move the cursor to iterate the last word
+			i--;
+		}
+		return len - i - count -1;    //compute the length
+	}
+};
