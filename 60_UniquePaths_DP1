@@ -1,0 +1,18 @@
+/*********************************************************************************
+*FileName:60_UniquePaths_DP1
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.13
+0ms, beats 18.18%，fastest
+Very fundamental dynamic programming problem
+**********************************************************************************/
+class Solution {
+public:
+	int uniquePaths(int m, int n) {
+		vector<vector<int>> dp(m, vector<int>(n, 1));
+		for (int i = 1; i<m; i++)
+			for (int j = 1; j<n; j++)
+				dp[i][j] = dp[i - 1][j] + dp[i][j - 1];   //Recursive equation
+		return dp[m - 1][n - 1];
+	}
+};
