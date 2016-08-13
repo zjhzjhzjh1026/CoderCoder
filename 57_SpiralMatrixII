@@ -1,0 +1,29 @@
+/*********************************************************************************
+*FileName:57_SpiralMatrixII
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.13
+4ms, beats 14.2%，fastest
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<int>> generateMatrix(int n) {
+		vector<vector<int>> ans(n, vector<int>(n));
+		int rowS = 0, rowE = n - 1, columnS = 0, columnE = n - 1;
+		for (int cur = 1; cur <= n*n;) {    //while(cur<=n*n)
+			for (int i = columnS; i <= columnE&&cur <= n*n; i++, cur++)
+				ans[rowS][i] = cur;
+			rowS++;
+			for (int i = rowS; i <= rowE&&cur <= n*n; i++, cur++)
+				ans[i][columnE] = cur;
+			columnE--;
+			for (int i = columnE; i >= columnS&&cur <= n*n; i--, cur++)
+				ans[rowE][i] = cur;
+			rowE--;
+			for (int i = rowE; i >= rowS&&cur <= n*n; i--, cur++)
+				ans[i][columnS] = cur;
+			columnS++;
+		}
+		return ans;
+	}
+};
