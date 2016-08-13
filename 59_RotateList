@@ -1,0 +1,41 @@
+/*********************************************************************************
+*FileName:59_RotateList
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.13
+8ms, beats 85.26%，fastest
+Rotate means put the last one to the most left place, and all other elements move right 1 bit.
+**********************************************************************************/
+/**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode(int x) : val(x), next(NULL) {}
+* };
+*/
+class Solution {                //Math Tip：向右rotate n位相当于从最左边到第len-n位移动到右边去！
+public:
+	ListNode* rotateRight(ListNode* head, int k) {
+		if (!k || !head) return head;
+		ListNode *cur, *tmp，*rear;
+		int len = 1;
+		cur = head;
+		while (cur->next) {     //计算length并获取到rear指针用于后续重新连接链表
+			cur = cur->next;
+			len++;
+		}
+		rear = cur;
+		cur = head;
+		k = len - k%len;   //每len次rotate回到原始情况
+		while (--k) {
+			cur = cur->next;
+		}
+		tmp = cur;
+
+		rear>next = head;
+		head = tmp->next;
+		tmp->next = NULL;
+		return head;
+	}
+};
