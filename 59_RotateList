@@ -5,6 +5,7 @@
 *Date:  2016.8.13
 8ms, beats 85.26%，fastest
 Rotate means put the last one to the most left place, and all other elements move right 1 bit.
+Use slow/fast pointer can void counting the len, but since it doesnt reduce any computation load so we dont use it.
 **********************************************************************************/
 /**
 * Definition for singly-linked list.
