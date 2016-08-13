@@ -1,0 +1,36 @@
+/*********************************************************************************
+*FileName:58_PermutationSequence_BT_TLE
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.13
+BackTracking
+**********************************************************************************/
+class Solution {
+public:
+	string getPermutation(int n, int k) {
+		string ans, temp;
+		vector<bool> flag(n, false);
+		int count = 1;
+		backTracking(n, k, ans, temp, 0, count, flag);
+		return ans;
+	}
+	void backTracking(int n, int k, string& ans, string& temp, int i, int& count, vector<bool>& flag) {
+		if (!ans.empty()) return;   //找到结果后中断BT，，把case(9,90000)由200ms+优化为80ms，但是还是TLE
+		if (n == i) {
+			if (k == count)
+				ans = temp;
+			count++;
+			return;
+
+		}
+		for (int j = 1; j <= n; j++) {
+			if (flag[j]) continue;
+			flag[j] = true;
+			temp.push_back('0' + j);
+			//cout<<temp<<endl;
+			backTracking(n, k, ans, temp, i + 1, count, flag);
+			flag[j] = false;
+			temp.pop_back();
+		}
+	}
+};
