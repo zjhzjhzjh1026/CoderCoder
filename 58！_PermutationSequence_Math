@@ -1,0 +1,25 @@
+/*********************************************************************************
+*FileName:58！_PermutationSequence_Math
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.8.13
+0ms, beats 52.79%.
+Since backtracking always got TLE, I use math principle to compute the kth permutation.
+(the number of permutations begin with '1' is (n-1)！, '2' is also (n-1)！, ………………)
+**********************************************************************************/
+class Solution {    //好好理解下里面的数学原理！
+public:
+	string getPermutation(int n, int k) {
+		string ans;
+		string nums = "123456789";
+		int frac[10] = { 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880 };  //因为是1-9 inclusive， 所以事先算好
+		--k;
+		for (int i = n; i>0; i--) {
+			int cur = k / frac[i - 1];
+			k %= frac[i - 1];
+			ans.push_back(nums[cur]);
+			nums.erase(nums.begin() + cur);
+		}
+		return ans;
+	}
+};
