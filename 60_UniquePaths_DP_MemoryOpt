@@ -1,0 +1,33 @@
+/*********************************************************************************
+*FileName:60_UniquePaths_DP_MemoryOpt
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.8.14
+0ms, beats 18.18%，fastest
+Reduce space complexity from O(m*n) to 2*n，further to 1*n;
+**********************************************************************************/
+class Solution {
+public:
+	int uniquePaths(int m, int n) {
+		vector<int> pathNow(n, 1);
+		vector<int> pathPast(n, 1);
+		for (int i = 1; i<m; i++) {
+			for (int j = 1; j<n; j++)
+				pathNow[j] = pathPast[j] + pathNow[j - 1];
+			swap(pathNow, pathPast);   
+		}
+		return pathPast[n - 1];  //因为最后也做了swap，所以返回的是Past
+	}
+};
+/******************************* 1*n Complexity**************************************/
+class Solution {
+public:
+	int uniquePaths(int m, int n) {
+		vector<int> paths(n, 1);
+		for (int i = 1; i<m; i++) {
+			for (int j = 1; j<n; j++)
+				paths[j] += paths[j - 1];
+		}
+		return paths[n - 1];
+	}
+};
