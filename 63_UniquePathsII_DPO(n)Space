@@ -1,0 +1,35 @@
+/*********************************************************************************
+*FileName:63_UniquePathsII_DPO(n)Space
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.8.16
+4ms, beats 15.50%，fastest
+Problem 60 with obstacle-check. O(n) space complexity.
+**********************************************************************************/
+class Solution {
+public:
+	int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+		int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+		if (obstacleGrid[m - 1][n - 1]) return 0;
+		vector<int> paths(n);
+		int sys = 1;
+		for (int i = 0; i<n; i++) {
+			if (obstacleGrid[0][i]) sys = 0;
+			paths[i] = sys;
+		}
+		if (obstacleGrid[0][0]) sys = 0;  //因为下面的代码无法check obGrid[0][0]
+		else sys = 1;
+		for (int i = 1; i<m; i++) {
+			for (int j = 0; j<n; j++) {
+				if (!j) {
+					if (obstacleGrid[i][j]) sys = 0;
+					paths[j] = sys;
+				}
+				else {
+					paths[j] = (1 - obstacleGrid[i - 1][j])*paths[j] + (1 - obstacleGrid[i][j - 1])*paths[j - 1];
+				}
+			}
+		}
+		return paths[n - 1];
+	}
+};
