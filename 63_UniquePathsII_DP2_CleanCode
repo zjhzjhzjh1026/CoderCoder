@@ -1,0 +1,35 @@
+/*********************************************************************************
+*FileName:63_UniquePathsII_DP2_CleanCode
+*Author:  Javan_Z
+*Version: 4.0
+*Date:  2016.8.16
+4ms, beats 15.50%，fastest
+Different State transition equation,Clean Code of v3.0
+**********************************************************************************/
+class Solution {
+public:
+	int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+		int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+		vector<vector<int>> paths(m + 1, vector<int>(n + 1, 0));
+		paths[0][1] = 1;  //用于正文第一行激活状态转移
+		for (int i = 1; i <= m; i++)
+			for (int j = 1; j <= n; j++)
+				paths[i][j] = obstacleGrid[i - 1][j - 1] ? 0 : paths[i - 1][j] + paths[i][j - 1];  //状态转移方程 注意obGrid要-1对齐 不然会RE
+		return paths[m][n];
+
+	}
+};
+/*********************O（n）memory complexity，but 8ms***************
+class Solution {
+public:
+	int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+		int m = obstacleGrid.size(), n = obstacleGrid[0].size();
+		vector<int> paths(n + 1, 0);
+		paths[1] = 1;
+		for (int i = 1; i <= m; i++)
+			for (int j = 1; j <= n; j++)
+				paths[j] = obstacleGrid[i - 1][j - 1] ? 0 : paths[j] + paths[j - 1];  //状态转移方程
+		return paths[n];
+
+	}
+};******/
