@@ -1,0 +1,28 @@
+/*********************************************************************************
+*FileName:64_MinimumPathSum_DP_ReferenceO(1)Space
+*Author:
+*Version: 
+*Date:  2016.8.16
+12ms, beats 27.53%，fastest
+Still Dynamic Programming problem, State Transition Equation:
+minCost[i][j]=min(minCost[i-1][j],minCost[i][j-1])+grid[i][j];
+optimize the memory complexity.
+**********************************************************************************/
+class Solution {
+public:
+	int minPathSum(vector<vector<int>>& a) {
+		int m = a.size();
+		if (m == 0) return 0;
+		int n = a[0].size();
+
+		for (int i = 0; i<m; i++) {
+			for (int j = 0; j<n; j++) {
+				int left = (j == 0) ? INT_MAX : a[i][j - 1]; //第一列左侧取INT_MAX
+				int up = (i == 0) ? INT_MAX : a[i - 1][j]; //第一行上侧取INT_MAX
+				if (i == 0 && j == 0) continue;
+				a[i][j] += min(left, up);
+			}
+		}
+		return a[m - 1][n - 1];
+	}
+};
