@@ -1,0 +1,51 @@
+/*********************************************************************************
+*FileName:67_AddBinary
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.17
+4ms, beats 28.47%，fastest
+do the computation one bit by one bit, and use "carry" to pass the carry
+**********************************************************************************/
+class Solution {
+public:
+	string addBinary(string a, string b) {
+		int cur1 = a.size() - 1, cur2 = b.size() - 1;
+		if (cur1<cur2) {
+			swap(a, b);
+			swap(cur1, cur2);    //注意长度也交换了！！
+		}
+		bool carry = false;
+		while (!(cur1<0 && cur2 <= 0)) {
+			if (carry) {
+				if (a[cur1] == '0'&&b[cur2] == '0') {
+					a[cur1] = '1';
+					carry = false;
+				}
+				else if (a[cur1] == '1'&&b[cur2] == '1') {
+					a[cur1] = '1';
+				}
+				else {
+					a[cur1] = '0';
+				}
+			}
+			else {
+				if (a[cur1] == '0'&&b[cur2] == '0') {
+					a[cur1] = '0';
+				}
+				else if (a[cur1] == '1'&&b[cur2] == '1') {
+					a[cur1] = '0';
+					carry = true;
+				}
+				else {
+					a[cur1] = '1';
+				}
+			}
+			if (cur2>0) cur2--;  //较短数到达首位，则将首位置0，并不再递减cur2
+			else b[cur2] = '0';
+			cur1--;
+			//cout<<a<<endl;
+		}
+		if (carry) a.insert(a.begin(), '1');  //如果首位还存在进位，则在前面插入进位1
+		return a;
+	}
+};
