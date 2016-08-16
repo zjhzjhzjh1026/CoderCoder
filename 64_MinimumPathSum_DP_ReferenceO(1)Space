@@ -8,7 +8,7 @@ Still Dynamic Programming problem, State Transition Equation:
 minCost[i][j]=min(minCost[i-1][j],minCost[i][j-1])+grid[i][j];
 optimize the memory complexity.
 **********************************************************************************/
-class Solution {
+class Solution {      //直接在原矩阵上计算，，不是很推荐
 public:
 	int minPathSum(vector<vector<int>>& a) {
 		int m = a.size();
