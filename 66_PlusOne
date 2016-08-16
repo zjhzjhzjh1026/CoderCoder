@@ -1,0 +1,26 @@
+/*********************************************************************************
+*FileName:66_PlusOne
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.16
+4ms, beats 10.69%，fastest
+stop when first not '9' appears, be careful about the all '9' cases.
+**********************************************************************************/
+class Solution {
+public:
+	vector<int> plusOne(vector<int>& digits) {
+		int len = digits.size(), cur;
+		for (cur = len - 1; cur >= 0; cur--) {
+			if (digits[cur] != 9) {  //该位非9，++，return
+				digits[cur]++;
+				return digits;
+			}
+			digits[cur] = 0;    //否则进位继续
+		}
+		if (cur<0) {     //全9情况
+			digits[0] = 1;
+			digits.push_back(0);
+		}
+		return digits;
+	}
+};
