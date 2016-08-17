@@ -1,0 +1,18 @@
+/*********************************************************************************
+*FileName:69_Sqrt(x)_Newton
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.17
+16ms, beats 3.95%
+Newton Method: X(n+1)=X(n)-f(x)/f'(x), i.e. x(n+1)=x(n)-(x^2-n)/(2*x)
+**********************************************************************************/
+class Solution {
+public:
+	int mySqrt(int x) {
+		long long ans = x;      //迭代初值
+		while (ans*ans>x) {
+			ans = (ans + x / ans) / 2;
+		}
+		return ans;
+	}
+};
