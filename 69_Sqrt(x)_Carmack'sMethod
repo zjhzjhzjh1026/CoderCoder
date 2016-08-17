@@ -1,0 +1,25 @@
+/*********************************************************************************
+*FileName:69_Sqrt(x)_Carmack'sMethod
+*Author: 
+*Version: 6.0
+*Date:  2016.8.17
+8ms, beats 51.63%
+it's mainly getting the inverse square root first, and get the inverse again.
+**********************************************************************************/
+class Solution {
+public:
+	int mySqrt(int x) {
+		uint64_t i;
+		double x2, y;
+		x2 = x * 0.5;
+		y = x;
+		i = *(uint64_t *)&y;
+		i = 0x5fe6eb50c7b537a9 - (i >> 1); //Magic number got from the Internet
+		y = *(double *)&i; // 倒数平方根的初始值猜测
+		y = y * (1.5 - (x2 * y * y)); //牛顿法迭代四次
+		y = y * (1.5 - (x2 * y * y));
+		y = y * (1.5 - (x2 * y * y));
+		y = y * (1.5 - (x2 * y * y)); 
+		return x * y;
+	}
+};
