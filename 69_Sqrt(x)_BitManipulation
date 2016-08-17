@@ -1,0 +1,24 @@
+/*********************************************************************************
+*FileName:69_Sqrt(x)_BitManipulation
+*Author:  Javan_Z
+*Version: 3.0
+*Date:  2016.8.17
+12ms, beats 7.36%
+**********************************************************************************/
+class Solution {
+public:
+	int mySqrt(int x) {
+		if (!x) return 0;
+		int ord = 0;
+		while ((1l << ord)*(1l << ord) <= x)   //先找到二进制下最高位的位置
+			ord++;
+		ord--;
+		int tmp = ord - 1, ans = (1 << ord);
+		while (tmp >= 0) {
+			if ((ans | (1l << tmp))*(ans | (1l << tmp)) <= x)  //每次尝试下一位置1
+				ans |= (1l << tmp);
+			tmp--;
+		}
+		return ans;
+	}
+};
