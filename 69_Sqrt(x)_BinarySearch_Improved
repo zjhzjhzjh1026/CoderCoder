@@ -1,0 +1,20 @@
+/*********************************************************************************
+*FileName:69_Sqrt(x)_BinarySearch_Improved
+*Author:  Javan_Z
+*Version: 5.0
+*Date:  2016.8.17
+8ms, beats 51.63%
+**********************************************************************************/
+class Solution {
+public:
+	int mySqrt(int x) {
+		int low = 1, high = (x >> 5) + 8, mid;  //当x>>5会掉到0时用+8“救”回来
+		if (high>65535) high = 65535;     //int的sqrt不会超过2^16
+		do {
+			mid = (low + high) / 2;
+			if ((long long)mid*mid>x) high = mid - 1;
+			else low = mid + 1;
+		} while (high >= low);   //普通的折半查找
+		return high;
+	}
+};
