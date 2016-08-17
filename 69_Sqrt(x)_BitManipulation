@@ -3,9 +3,9 @@
 *Author:  Javan_Z
 *Version: 3.0
 *Date:  2016.8.17
-12ms, beats 7.36%
+12ms, beats 7.36%///8ms，beats 51.63% fastest
 **********************************************************************************/
-class Solution {
+class Solution {      //12ms
 public:
 	int mySqrt(int x) {
 		if (!x) return 0;
@@ -21,4 +21,18 @@ public:
 		}
 		return ans;
 	}
-};
+};/**********************************************   8ms
+class Solution {
+public:
+	int mySqrt(int x) {
+		long long ans = 0;
+		long long ord = 1l << 16;
+		while (ord>0) {
+			ans |= ord;
+			if (ans*ans>x)
+				ans ^= ord;     //把刚位或运算的值变回来
+			ord >>= 1;
+		}
+		return ans;
+	}
+};*//////////////////////////////////////////////////
