@@ -1,0 +1,45 @@
+/*********************************************************************************
+*FileName:71_SimplifyPath_Stack
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.18
+10ms, beats 48.00%
+A little complicated code, but works okay~ Use stack to store data
+Corner Cases:
+1. ///  (Solution: judge if len_t != 1)
+2. empty stack meet "/.." (Solution: judge !bin.empty())
+**********************************************************************************/
+class Solution {
+public:
+	string simplifyPath(string path) {
+		stack<string> bin;
+		string ans;
+		int i = 0;
+		while (path[i]) {
+			if (!path[i + 1])  break;  //不直接用这个判断循环是因为有/结尾和没/结尾两种方式
+			int len = 1;
+			while (path[i + len] != '/'&&path[i + len])
+				len++;
+			string tmp = path.substr(i, len);   //将当前路径字符串放入tmp处理
+			int len_t = tmp.size();
+			i += len;
+			if (len_t != 1) {
+				if (tmp[1] == '.') {
+					if (tmp[2] == '.'&&len_t == 3) {  // "/.."在stack中还有东西时pop
+						if (!bin.empty())  bin.pop();
+					}
+					else if (len_t != 2)    //在非"/."情况时候push
+						bin.push(tmp);
+				}
+				else                        // '/'后第一个字符非.时push
+					bin.push(tmp);
+				//cout<<bin.size()<<endl;
+			}
+		}
+		while (!bin.empty()) {
+			ans.insert(0, bin.top());    //注意是放到前面不是push
+			bin.pop();
+		}
+		return ans.empty() ? "/" : ans;   //为空时依然输出"/"
+	}
+};
