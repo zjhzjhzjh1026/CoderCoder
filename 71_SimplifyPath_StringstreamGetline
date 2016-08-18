@@ -1,0 +1,27 @@
+/*********************************************************************************
+*FileName:71_SimplifyPath_StringstreamGetline
+*Author:  Javan_Z
+*Version: 2.0
+*Date:  2016.8.18
+8ms, beats 51.00%,fastest
+Corner Cases:
+1. ///  (Solution: judge if len_t != 1)
+2. empty stack meet "/.." (Solution: judge !bin.empty())
+**********************************************************************************/
+class Solution {
+public:
+	string simplifyPath(string path) {
+		string tmp, ans;
+		vector<string> bin;
+		stringstream t0(path);
+		while (getline(t0, tmp, '/')) {
+			if (tmp == "." || tmp == "") continue;
+			if (tmp == "..") {
+				if (!bin.empty()) bin.pop_back();  //注意判断一下不能为空
+			}
+			else bin.push_back(tmp);
+		}
+		for (auto str : bin) ans += "/" + str;
+		return ans.empty() ? "/" : ans;
+	}
+};
