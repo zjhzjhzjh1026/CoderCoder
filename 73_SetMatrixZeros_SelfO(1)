@@ -1,0 +1,37 @@
+/*********************************************************************************
+*FileName:73_SetMatrixZeros_SelfO(1)
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.19
+72ms, beats 38.85%
+Save the info. in the first row and column and 2 variables
+**********************************************************************************/
+class Solution {
+public:
+	void setZeroes(vector<vector<int>>& matrix) {
+		int Row0 = 1, Col0 = 1, m = matrix.size(), n = matrix[0].size();
+		for (int i = 0; i<m; i++)                //save
+			if (!matrix[i][0]) Col0 = 0;
+		for (int j = 0; j<n; j++)
+			if (!matrix[0][j]) Row0 = 0;
+		for (int i = 1; i<m; i++)
+			for (int j = 1; j<n; j++) {
+				if (!matrix[i][j]) matrix[0][j] = matrix[i][0] = 0;
+			}
+		for (int i = 1; i<m; i++)               //test
+			if (!matrix[i][0]) setRowZero(matrix, i, n);
+		for (int j = 1; j<n; j++)
+			if (!matrix[0][j]) setColZero(matrix, j, m);
+		if (!Col0) setColZero(matrix, 0, m);
+		if (!Row0) setRowZero(matrix, 0, n);
+		return;
+	}
+	void setColZero(vector<vector<int>>& matrix, int j, int m) {
+		for (int i = 0; i<m; i++)
+			matrix[i][j] = 0;
+	}
+	void setRowZero(vector<vector<int>>& matrix, int i, int n) {
+		for (int j = 0; j<n; j++)
+			matrix[i][j] = 0;
+	}
+};
