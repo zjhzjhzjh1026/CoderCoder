@@ -1,0 +1,30 @@
+/*********************************************************************************
+*FileName:74_SearchA2DMatrix_BinarySearch
+*Author:  Javan_Z
+*Version: 1.0
+*Date:  2016.8.19
+12ms, beats 25.63%,fastest
+Binary search twice on column & row respectively.
+**********************************************************************************/
+class Solution {
+public:
+	bool searchMatrix(vector<vector<int>>& matrix, int target) {
+		int m = matrix.size(), n = matrix[0].size(), left = 0, right = m - 1, mid;
+		while (left<right) {
+			mid = left + (right - left) / 2 + 1;           //为了找出最接近但不大于target的行数
+			if (target<matrix[mid][0]) right = mid - 1;
+			else if (target>matrix[mid][0]) left = mid;  // 为了找出最接近但不大于target的行数
+			else return true;
+		}
+		// cout<<left<<" "<<mid<<" "<<right<<" "<<endl;
+		int row = left;
+		left = 0; right = n - 1;
+		while (left <= right) {
+			mid = left + (right - left) / 2;
+			if (target<matrix[row][mid]) right = mid - 1;
+			else if (target>matrix[row][mid]) left = mid + 1;
+			else return true;
+		}
+		return false;
+	}
+};
