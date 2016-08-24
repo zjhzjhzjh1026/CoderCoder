@@ -1,0 +1,32 @@
+/*********************************************************************************
+*FileName:75_SortColors_QuickSort
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.8.24
+4ms, beats 13.60%, fastest
+Quick Sort, O(nlogn)
+**********************************************************************************/ 
+class Solution {
+public:
+	void sortColors(vector<int>& nums) {
+		int low = 0, high = nums.size() - 1;
+		qSort(nums, 0, high);
+	}
+	void qSort(vector<int>& nums, int low, int high) {
+		if (low >= high) return;
+		int i = low, j = high;
+		int temp = nums[low];
+		while (i<j) {
+			while (i<j&&nums[j] >= temp)
+				j--;
+			nums[i] = nums[j];
+
+			while (i<j&&nums[i] <= temp)
+				i++;
+			nums[j] = nums[i];
+		}
+		nums[i] = temp;
+		qSort(nums, low, i - 1);
+		qSort(nums, i + 1, high);
+	}
+};
