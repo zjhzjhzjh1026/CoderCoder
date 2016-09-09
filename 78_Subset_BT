@@ -1,0 +1,27 @@
+/*********************************************************************************
+*FileName:78_Subset_BT
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.9
+BackTracking
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<int>> subsets(vector<int>& nums) {
+		int len = nums.size();
+		vector<vector<int>> ans;
+		vector<int> comb;
+		backtracking(nums, ans, comb, len, 0, len);
+		return ans;
+	}
+
+	void backtracking(vector<int>& nums, vector<vector<int>>& ans, vector<int>& comb, int k, int start, int len) {
+		ans.push_back(comb);
+		if (k == 0) return;
+		for (int i = start; i<len; i++) {
+			comb.push_back(nums[i]);
+			backtracking(nums, ans, comb, k - 1, i + 1, len);
+			comb.pop_back();
+		}
+	}
+};
