@@ -1,0 +1,28 @@
+/*********************************************************************************
+*FileName:79_WordSearch
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.9
+BackTracking, require that there is no '$' in the block;
+**********************************************************************************/
+class Solution {
+public:
+	bool exist(vector<vector<char>>& board, string word) {
+		int row = board.size(), column = board[0].size();
+		for (int i = 0; i<row; i++)
+			for (int j = 0; j<column; j++) {
+				if (SearchExist(board, word, i, j, 0)) return true;
+			}
+		return false;
+	}
+
+	bool SearchExist(vector<vector<char>>& board, string word, int x, int y, int count) {
+		if (word.size() == count) return true;
+		if ((x<0 || y<0 || x >= board.size() || y >= board[0].size() || board[x][y] != word[count])) return false;
+		board[x][y] = '$';      //sign the used
+		bool sign = SearchExist(board, word, x + 1, y, count + 1) || SearchExist(board, word, x - 1, y, count + 1) || SearchExist(board, word, x, y + 1, count + 1)
+			|| SearchExist(board, word, x, y - 1, count + 1);
+		board[x][y] = word[count];  //rollback the used symbol
+		return sign;
+	}
+};
