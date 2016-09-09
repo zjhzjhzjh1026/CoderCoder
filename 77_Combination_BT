@@ -1,0 +1,28 @@
+/*********************************************************************************
+*FileName:77_Combination_BT
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.8
+BackTracking
+**********************************************************************************/ 
+class Solution {
+public:
+	vector<vector<int>> combine(int n, int k) {
+		vector<int> combination;
+		vector<vector<int>> ans;
+		int count = 0;
+		backtracking(ans, combination, 0, k, n, 0);
+		return ans;
+	}
+	void backtracking(vector<vector<int>>& ans, vector<int>& comb, int count, int k, int n, int start) {
+		if (count == k) {
+			ans.push_back(comb);
+			return;
+		}
+		for (int i = start; i<n; i++) {
+			comb.push_back(i + 1);
+			backtracking(ans, comb, count + 1, k, n, i + 1);
+			comb.pop_back();
+		}
+	}
+};
