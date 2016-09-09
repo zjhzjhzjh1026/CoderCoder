@@ -1,0 +1,23 @@
+/*********************************************************************************
+*FileName:78_Subset_BitOperation
+*Author : Javan_Z
+*Version : 2.0
+*Date : 2016.9.9
+Bit Operation
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<int>> subsets(vector<int>& nums) {
+		int len = nums.size();
+		vector<vector<int>> ans;
+		unsigned long long limit = 1 << len;
+		for (int i = 0; i<limit; i++) {
+			vector<int> comb;    //must be inside to prevent pop 
+			for (int j = 0; j<len; j++) {
+				if (i&(1 << j)) comb.push_back(nums[j]);
+			}
+			ans.push_back(comb);
+		}
+		return ans;
+	}
+};
