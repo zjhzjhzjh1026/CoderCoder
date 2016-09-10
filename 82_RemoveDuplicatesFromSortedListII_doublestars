@@ -1,0 +1,33 @@
+/*********************************************************************************
+*FileName:82_RemoveDuplicatesFromSortedListII_doublestars
+*Author : Javan_Z
+*Version : 3.0
+*Date : 2016.9.10
+Use **cur to avoid using dummy Listhead
+**********************************************************************************/
+/**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode(int x) : val(x), next(NULL) {}
+* };
+*/
+class Solution {
+public:
+	ListNode* deleteDuplicates(ListNode* head) {
+		if (!head || !head->next) return head;
+		ListNode** cur = &head;
+		while (*cur) {
+			if ((*cur)->next && (*cur)->next->val == (*cur)->val) {
+				ListNode* tmp = *cur;
+				while (tmp&&tmp->val == (*cur)->val) tmp = tmp->next;
+				*cur = tmp;     //如果第一次就重复，那么会进入这一步将head头放到第一个不重复的元素上
+			}
+			else {
+				cur = &((*cur)->next);   //改变cur的指向，使其不再指向head
+			}
+		}
+		return head;
+	}
+};
