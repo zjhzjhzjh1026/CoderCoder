@@ -1,0 +1,30 @@
+/*********************************************************************************
+*FileName:83_RemoveDuplicatesFromSortedList
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.10
+**********************************************************************************/
+/**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode(int x) : val(x), next(NULL) {}
+* };
+*/
+class Solution {
+public:
+	ListNode* deleteDuplicates(ListNode* head) {
+		if (!head) return head;
+		ListNode* cur = head;
+		while (cur->next) {
+			ListNode* tmp = cur->next;
+			if (cur->val == tmp->val) {
+				if (tmp->next) cur->next = tmp->next;  //重复元素直接跳过
+				else cur->next = NULL;    //当最后一个元素也是重复元素时不能直接跳转，会RE
+			}
+			else cur = cur->next;   //不是重复元素，跳
+		}
+		return head;
+	}
+};
