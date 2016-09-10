@@ -1,0 +1,32 @@
+/*********************************************************************************
+*FileName:81_SearchInRotatedSortedArrayII_Improved
+*Author : Javan_Z
+*Version : 2.0
+*Date : 2016.9.10
+Followed by the version 1.0,the only case we need to involve O(N) part is when 
+nums[left]==nums[mid]==nums[right],,,because whenever you see 
+A[m] == A[l] && A[m] != A[h], A[l] to A[m] must be identical.
+**********************************************************************************/
+class Solution {
+public:
+	bool search(vector<int>& nums, int target) {
+		int left = 0, right = nums.size() - 1;
+		return recur(nums, target, left, right);
+	}
+
+	bool recur(vector<int>& nums, int tar, int left, int right) {
+		// cout<<left<<right<<endl;
+		if (left == right) return nums[left] == tar ? true : false;
+		int mid = left + (right - left) / 2;
+		if (nums[mid] == tar) return true;
+		if (nums[left]<nums[mid] || (nums[left] == nums[mid] && nums[mid] != nums[right])) {
+			if (nums[left] <= tar&&nums[mid]>tar) return recur(nums, tar, left, mid - 1);
+			else return recur(nums, tar, mid + 1, right);
+		}
+		else if (nums[left]>nums[mid]) {
+			if (nums[left]>tar&&nums[mid]<tar) return recur(nums, tar, mid + 1, right);
+			else return recur(nums, tar, left, mid - 1);
+		}
+		else return recur(nums, tar, left + 1, right);
+	}
+};
