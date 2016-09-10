@@ -1,0 +1,39 @@
+/*********************************************************************************
+*FileName:82_RemoveDuplicatesFromSortedListII_DummyHead
+*Author : Javan_Z
+*Version : 2.0
+*Date : 2016.9.10
+Use dummy Listhead
+**********************************************************************************/
+/**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode(int x) : val(x), next(NULL) {}
+* };
+*/
+class Solution {
+public:
+	ListNode* deleteDuplicates(ListNode* head) {
+		ListNode dummyHead(0);
+		dummyHead.next = head;    
+		ListNode *pre = &dummyHead;
+		ListNode *cur = pre->next;
+
+		while (cur) {
+			ListNode *nex = cur->next;
+			if (nex&&nex->val == cur->val) {
+				while (nex&&nex->val == cur->val) nex = nex->next;  //找出所有重复，并将第一个重复元素的前序节点pre的next指向不重复的第一个元素
+				cur = nex;
+				pre->next = cur;
+			}
+			else {
+				pre = cur;   //未出现重复元素，直接将pre和cur都向后移动一位
+				cur = nex;
+			}
+
+		}
+		return dummyHead.next;
+	}
+};
