@@ -13,7 +13,7 @@ Good Recursive!
 *     ListNode(int x) : val(x), next(NULL) {}
 * };
 */
-class Solution {
+class Solution {       
 public:
 	ListNode* deleteDuplicates(ListNode* head) {
 		if (!head) return NULL;
@@ -22,14 +22,14 @@ public:
 		int val = head->val;
 		ListNode* nex = head->next;
 
-		if (nex->val != head->val) {
+		if (nex->val != head->val) {       //保留当前位，所以是head-next=
 			head->next = deleteDuplicates(nex);
 			return head;
 		}
 		else {
-			int tmp = nex->val;
+			int tmp = nex->val;         
 			while (nex&&nex->val == tmp) nex = nex->next;
-			return deleteDuplicates(nex);
+			return deleteDuplicates(nex);   //去掉所有有重复元素的Node，所以直接return从nex结点开始的结果
 		}
 	}
 };
