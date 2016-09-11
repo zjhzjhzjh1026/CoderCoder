@@ -1,0 +1,20 @@
+/*********************************************************************************
+*FileName:88_MergeSortedArrays
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.10
+Just do it~
+**********************************************************************************/
+class Solution {
+public:
+	void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+		int i = 0, k = m;
+		for (int j = 0; j<n; j++) {
+			while (nums1[i]<nums2[j] && i<k) i++;      //not m,the number of nums1 will increase with the inserting of new elements.
+			nums1.insert(nums1.begin() + i, nums2[j]);
+			k++;      //update nums1 element amount
+		}
+		nums1.erase(nums1.begin() + m + n, nums1.end());  //in case of redundant elements
+		return;
+	}
+};
