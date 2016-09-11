@@ -1,0 +1,17 @@
+/*********************************************************************************
+*FileName:89_GreyCode_Formula
+*Author : Javan_Z
+*Version : 3.0
+*Date : 2016.9.11
+(i+1)th grey code: i>>1 ^ i
+**********************************************************************************/
+class Solution {
+public:
+	vector<int> grayCode(int n) {
+		vector<int> ans;
+		for (int i = 0; i<(1 << n); i++) {
+			ans.push_back(i >> 1 ^ i);
+		}
+		return ans;
+	}
+};
