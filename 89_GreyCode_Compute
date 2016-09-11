@@ -1,0 +1,24 @@
+/*********************************************************************************
+*FileName:89_GreyCode_Compute
+*Author : Javan_Z
+*Version : 2.0
+*Date : 2016.9.11
+/0/->/0 1/->/0 1 3 2/->/0 1 3 2 6 7 5 4/ everytime we add 2^i to last array in 
+the reverse sequence, and push_back.
+**********************************************************************************/
+class Solution {
+public:
+	vector<int> grayCode(int n) {
+		vector<int> ans(1, 0);
+		for (int i = 0; i<n; i++) {
+			int count = ans.size();
+			while (count) {
+				count--;
+				int tmp = ans[count];
+				tmp += (1 << i);
+				ans.push_back(tmp);
+			}
+		}
+		return ans;
+	}
+};
