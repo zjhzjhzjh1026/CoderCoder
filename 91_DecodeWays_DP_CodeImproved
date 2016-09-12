@@ -1,0 +1,33 @@
+/*********************************************************************************
+*FileName:91_DecodeWays_DP_CodeImproved
+*Author : Javan_Z
+*Version : 2.0
+*Date : 2016.9.12
+summary into 4 cases to solve the problem~
+**********************************************************************************/
+class Solution {
+public:
+	int numDecodings(string s) {
+		int len = s.size();
+		if (s[0] == '0' || !len) return 0;
+		if (len == 1) return 1;
+		int ans = 0, back1 = 1, back2 = 1;     //back1,back2分别指回退1位和2位的case数，但回退一位的不包含2位的情况，即暂不考虑最近两位的合体与拆分
+		for (int i = 1; i<s.size(); i++) {     //注意是从1开始的
+			if (isValid(s[i]) && isValid(s[i], s[i - 1]))  ans += back1 + back2;  //可合体可拆分
+			if (!isValid(s[i]) && isValid(s[i], s[i - 1])) ans += back2;          //当前位为0，则上一位必须用于组建合体，故此时等于i-2位的case数
+			if (isValid(s[i]) && !isValid(s[i], s[i - 1])) ans += back1;          //不满足合体条件，故此时等于第i-1位的case数
+			if (!isValid(s[i]) && !isValid(s[i], s[i - 1])) return 0;            //当前位为0且不能被组合，故无法decode，直接返回0种
+			//cout<<back1<<back2<<endl;
+			back2 = back1;         //向前一位，即back2现在变为back1的大小
+			back1 = ans;          //而back1变为当前位的大小
+			ans = 0;            //清0
+		}
+		return back1;
+	}
+	bool isValid(int i) {
+		return i != '0' ? true : false;
+	}
+	bool isValid(char i, char j) {
+		return j == '1' || j == '2'&&i <= '6';
+	}
+};
