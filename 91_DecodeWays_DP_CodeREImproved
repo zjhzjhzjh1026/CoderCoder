@@ -1,0 +1,26 @@
+/*********************************************************************************
+*FileName:91_DecodeWays_DP_CodeREImproved
+*Author : Javan_Z
+*Version : 3.0
+*Date : 2016.9.12
+best code version ever
+**********************************************************************************/
+class Solution {
+public:
+	int numDecodings(string s) {
+		int back1 = 1, back2 = 1, len = s.size();
+		if (!len || s[0] == '0') return 0;
+		for (int i = 1; i<len; i++) {
+			//0不能单独使用，所以back1不能被计入组合数
+			if (s[i] == '0') back1 = 0;
+			//走一位和两位的情况，，然后向前移动一位
+			if (s[i - 1] == '1' || s[i - 1] == '2'&&s[i] <= '6') {
+				back1 = back1 + back2;
+				back2 = back1 - back2;   //move forward for 1 step
+			}
+			//不能合并成2位理解，所以+0种，并将back1和back2向前移动一位
+			else back2 = back1;
+		}
+		return back1;
+	}
+};
