@@ -1,0 +1,26 @@
+/*********************************************************************************
+*FileName:90_SubsetII_Backtracking
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.11
+**********************************************************************************/
+class Solution {
+public:
+	vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+		sort(nums.begin(), nums.end());
+		vector<int> com;
+		vector<vector<int>> ans;
+		backtracking(nums, com, ans, 0);
+		return ans;
+	}
+
+	void backtracking(vector<int>& nums, vector<int>& com, vector<vector<int>>& ans, int begin) {
+		ans.push_back(com);
+		for (int i = begin; i<nums.size(); i++)
+			if (i == begin || nums[i] != nums[i - 1]) {  //这里的i==begin是关键，如果改为0==i则是不出现任何重复元素的那一类
+				com.push_back(nums[i]);                 //这里的i==begin刚好排除了122中选了1再在两个子集中重复选2的case，，而不会排除22这种case
+				backtracking(nums, com, ans, i + 1);
+				com.pop_back();
+			}
+	}
+};
