@@ -1,0 +1,34 @@
+/*********************************************************************************
+*FileName:92_ReverseLinkedListII
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.12
+**********************************************************************************/
+/**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode(int x) : val(x), next(NULL) {}
+* };
+*/
+class Solution {
+public:
+	ListNode* reverseBetween(ListNode* head, int m, int n) {
+		ListNode* dummyhead = new ListNode(0); //使用dummyhead是为了防止从一个节点开始rotate的情况下head丢失的情况
+		dummyhead->next = head;
+		ListNode* start = dummyhead;
+		int k = n - m;
+		while (--m)  start = start->next;
+		ListNode *change1 = start->next;
+
+		while (k--) {
+			ListNode *change2 = change1->next;
+			// cout<<start->val<<"  "<<change1->val<<"   "<<change2->val<<endl;
+			change1->next = change2->next;
+			change2->next = start->next;
+			start->next = change2;
+		}
+		return dummyhead->next;
+	}
+};
