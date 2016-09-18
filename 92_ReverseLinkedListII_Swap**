@@ -1,0 +1,32 @@
+/*********************************************************************************
+*FileName:92_ReverseLinkedListII_Swap**
+*Author : Javan_Z
+*Version : 2.0
+*Date : 2016.9.18
+**********************************************************************************/
+/**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode(int x) : val(x), next(NULL) {}
+* };
+*/
+class Solution {
+public:
+	ListNode* reverseBetween(ListNode *head, int m, int n) {
+		ListNode **a = &head, **b;
+		for (; m--; n--)
+			a = &(*(b = a))->next;
+		for (; n--; swap(*b, *a)) {
+			/* for(ListNode* i=head;i;i=i->next)
+			cout<<i->val;
+			cout<<endl;*/
+
+			swap(*b, (*a)->next);     //这种交换实质上不是交换两个节点，而是交换指向它们的指针指向的位置
+
+
+		}
+		return head;
+	}
+};
