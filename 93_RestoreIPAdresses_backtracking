@@ -1,0 +1,25 @@
+/*********************************************************************************
+*FileName:93_RestoreIPAdresses_backtracking
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.20
+**********************************************************************************/
+class Solution {
+public:
+	vector<string> restoreIpAddresses(string s) {
+		vector<string> ans;
+		backtracking(s, ans, 0, 0, "");
+		return ans;
+	}
+
+	void backtracking(string s, vector<string>& ans, int idx, int count, string comb) {
+		if (count>4) return;
+		if (4 == count&&idx == s.size()) ans.push_back(comb);
+		for (int i = 1; i<4; i++) {
+			if (i + idx>s.size()) break;
+			string tmp = s.substr(idx, i);
+			if (tmp.size() == 3 && atoi(tmp.c_str())>255 || tmp.size()>1 && tmp[0] == '0') continue;  //判断非0XX以及大于255的状况
+			backtracking(s, ans, idx + i, count + 1, comb + tmp + (count == 3 ? "" : "."));  //count是用来计数第几组的，这里是判断最后一组不需要再加“.”
+		}
+	}
+};
