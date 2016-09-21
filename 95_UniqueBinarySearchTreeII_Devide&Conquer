@@ -1,0 +1,48 @@
+/*********************************************************************************
+*FileName:95_UniqueBinarySearchTreeII_Devide&Conquer
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.21
+
+**********************************************************************************/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	vector<TreeNode*> generateTrees(int n) {
+		if (!n) return vector<TreeNode*>();   //case0:[[]]instead of []
+		return genBST(1, n);
+	}
+
+	vector<TreeNode*> genBST(int start, int end) {
+		vector<TreeNode*> ans;
+		if (start>end) {                 //initial case
+			ans.push_back(NULL);
+			return ans;
+		}
+		if (start == end) {             //initial case
+			ans.push_back(new TreeNode(start));
+			return ans;
+		}
+		vector<TreeNode*> left, right;
+		for (int i = start; i <= end; i++) {
+			left = genBST(start, i - 1);      //遍历以各个节点为头的情况，将剩余节点划分为左节点和右节点
+			right = genBST(i + 1, end);
+			for (TreeNode* lnode : left)  //注意这里遍历的是各种情况的头结点，而不是一种情况里的各个节点
+				for (TreeNode* rnode : right) {
+					TreeNode* root = new TreeNode(i);
+					root->left = lnode;    //connect
+					root->right = rnode;
+					ans.push_back(root);
+				}
+		}
+		return ans;
+	}
+};
