@@ -16,9 +16,8 @@
 class Solution {
 public:
 	bool isSameTree(TreeNode* p, TreeNode* q) {
-		if (!p) return q == NULL;   
-		if (!q) return false;    //上一句已经判断过了p为不为NULL
 		if (!p && !q) return true;
+		if (!p || !q) return false;  //因为上一句已经判断过了p/q均为null的情况
 		if (p->val == q->val) return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
 		else return false;
 	}
