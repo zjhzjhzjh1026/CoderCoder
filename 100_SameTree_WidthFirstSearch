@@ -1,5 +1,5 @@
 /*********************************************************************************
-*FileName:100_SameTree_DepthFirstSearch
+*FileName:100_SameTree_WidthFirstSearch
 *Author : Javan_Z
 *Version : 1.0
 *Date : 2016.9.23
@@ -16,8 +16,8 @@
 class Solution {
 public:
 	bool isSameTree(TreeNode* p, TreeNode* q) {
-		if (!p) return q == NULL;
-		if (!q) return false;
+		if (!p) return q == NULL;   
+		if (!q) return false;    //上一句已经判断过了p为不为NULL
 		if (!p && !q) return true;
 		if (p->val == q->val) return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
 		else return false;
