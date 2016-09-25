@@ -1,0 +1,35 @@
+/*********************************************************************************
+*FileName:102_BinaryTreeLevelOrderTraversal_DFS
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.25
+**********************************************************************************/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	vector<vector<int>> levelOrder(TreeNode* root) {
+		vector<vector<int>> ans;
+		DFS(ans, root, 0);
+		return ans;
+	}
+
+	void DFS(vector<vector<int>>& ans, TreeNode* cur, int level) {
+		if (!cur) return;
+		if (ans.size()<level + 1) {   //因为声明的时候是0*0的
+			vector<int> tmp;
+			ans.push_back(tmp);
+		}
+		ans[level].push_back(cur->val);
+		DFS(ans, cur->left, level + 1);
+		DFS(ans, cur->right, level + 1);
+		return;
+	}
+};
