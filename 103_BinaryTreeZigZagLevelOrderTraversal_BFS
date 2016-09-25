@@ -1,0 +1,39 @@
+/*********************************************************************************
+*FileName:103_BinaryTreeZigZagLevelOrderTraversal_BFS
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.25
+**********************************************************************************/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+		vector<vector<int>> ans;
+		queue<TreeNode*> que;
+		if (!root) return ans;
+		que.push(root);
+		bool flag = false;
+		while (!que.empty()) {
+			int levelNum = que.size();
+			vector<int> tmp;
+			for (int i = 0; i<levelNum; i++) {
+				if (que.front()->left) que.push(que.front()->left);
+				if (que.front()->right) que.push(que.front()->right);
+				tmp.push_back(que.front()->val);
+				que.pop();
+			}
+			if (flag) reverse(tmp.begin(), tmp.end());    //利用flag翻转
+			ans.push_back(tmp);
+			flag = !flag;
+		}
+		return ans;
+	}
+};
