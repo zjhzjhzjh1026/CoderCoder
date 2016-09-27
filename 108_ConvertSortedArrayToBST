@@ -1,0 +1,31 @@
+/*********************************************************************************
+*FileName:108_ConvertSortedArrayToBST
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.27
+**********************************************************************************/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	TreeNode* sortedArrayToBST(vector<int>& nums) {
+		int len = nums.size();
+		if (!len) return nullptr;
+		return build(nums, 0, len - 1);
+	}
+	TreeNode* build(vector<int>& nums, int start, int end) {   //类似二分查找
+		if (start>end) return nullptr;
+		int mid = start + (end - start) / 2;
+		TreeNode* node = new TreeNode(nums[mid]);
+		node->left = build(nums, start, mid - 1);
+		node->right = build(nums, mid + 1, end);
+		return node;
+	}
+};
