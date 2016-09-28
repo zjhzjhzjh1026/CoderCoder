@@ -1,0 +1,48 @@
+/*********************************************************************************
+*FileName:109_ConvertSortedListToBST_CleanInorder
+*Author : Javan_Z
+*Version : 3.0
+*Date : 2016.9.28
+**********************************************************************************/
+/**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode(int x) : val(x), next(NULL) {}
+* };
+*/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	ListNode* cur;    //全局
+	TreeNode* sortedListToBST(ListNode* head) {
+		this->cur = head;
+		ListNode* run = head;
+		int count = 0;
+		while (run) {
+			count++;
+			run = run->next;
+		}
+		return helper(0, count - 1);
+	}
+	TreeNode* helper(int start, int end) {
+		if (start>end)  return nullptr;
+		// cout<<start<<end<<endl;
+		int mid = start + (end - start) / 2;
+		TreeNode* left = helper(start, mid - 1);
+		TreeNode* node = new TreeNode(cur->val);  //赋值必须在left建立之后！！！不然cur 不是想要的中值，而是1
+		node->left = left;
+		cur = cur->next;
+		node->right = helper(mid + 1, end);
+		return node;
+	}
+};
