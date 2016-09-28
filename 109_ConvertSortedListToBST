@@ -1,0 +1,49 @@
+/*********************************************************************************
+*FileName:109_ConvertSortedListToBST
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.28
+**********************************************************************************/
+/**
+* Definition for singly-linked list.
+* struct ListNode {
+*     int val;
+*     ListNode *next;
+*     ListNode(int x) : val(x), next(NULL) {}
+* };
+*/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	TreeNode* sortedListToBST(ListNode* head) {
+		this->list = head;
+		ListNode* node = head;
+		int count = 0;
+		while (node) {     //计算链表长度得到初始count
+			node = node->next;
+			count++;
+		}
+		return helper(head, count);
+	}
+private:
+	ListNode* list;
+	TreeNode* helper(ListNode* &head, int n) {   //注意这里传递的参数是&head！！！因为要每次将->next的节点传入
+		// cout<<n<<endl;
+		if (!n) return nullptr;
+
+		TreeNode* node = new TreeNode(0);
+		node->left = helper(head, n / 2);  //类似inorder
+		node->val = head->val;
+		head = head->next;
+		node->right = helper(head, n - n / 2 - 1);
+		return node;
+	}
+};
