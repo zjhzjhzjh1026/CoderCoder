@@ -1,0 +1,39 @@
+/*********************************************************************************
+*FileName:113_PathSumII
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.29
+**********************************************************************************/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	vector<vector<int>> pathSum(TreeNode* root, int sum) {
+		vector<vector<int>> ans;
+		if (!root) return ans;
+		vector<int> comb;
+		helper(root, sum, ans, comb);
+		return ans;
+	}
+
+	void helper(TreeNode* node, int sum, vector<vector<int>>& ans, vector<int> comb) { //如果comb取地址，那么就需要pop_back
+		if (!node) {
+			if (!sum)
+				ans.push_back(comb);
+			return;
+		}
+		comb.push_back(node->val);
+		if (!node->left) { helper(node->right, sum - (node->val), ans, comb); comb.pop_back(); return; }
+		if (!node->right) { helper(node->left, sum - (node->val), ans, comb); comb.pop_back(); return; }
+		helper(node->left, sum - (node->val), ans, comb);
+		helper(node->right, sum - (node->val), ans, comb);
+		//comb.pop_back();
+	}
+};
