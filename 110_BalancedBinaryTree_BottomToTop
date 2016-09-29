@@ -1,0 +1,31 @@
+/*********************************************************************************
+*FileName:110_BalancedBinaryTree_BottomToTop
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.28
+**********************************************************************************/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	bool isBalanced(TreeNode* root) {  //each node only needs to be accessed once!
+		return depth(root) != -1;
+	}
+
+	int depth(TreeNode* root) {
+		if (!root) return 0;
+		int ll = depth(root->left);
+		if (ll == -1) return -1;
+		int lr = depth(root->right);
+		if (lr == -1) return -1;
+		if (abs(ll - lr)>1) return -1;
+		return max(ll, lr) + 1;
+	}
+};
