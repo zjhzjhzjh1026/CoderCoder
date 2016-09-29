@@ -1,0 +1,28 @@
+/*********************************************************************************
+*FileName:112_PathSum
+*Author : Javan_Z
+*Version : 1.0
+*Date : 2016.9.28
+**********************************************************************************/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	bool hasPathSum(TreeNode* root, int sum) {
+		if (!root) return false;    //判断无元素的特殊情况
+		return helper(root, sum);
+	}
+	bool helper(TreeNode* root, int sum) {
+		if (!root) return sum == 0;
+		if (!root->left) return helper(root->right, sum - (root->val));  //注意有单子节点的不能作为leaf
+		if (!root->right) return helper(root->left, sum - (root->val));
+		return helper(root->left, sum - (root->val)) || helper(root->right, sum - (root->val));
+	}
+};
