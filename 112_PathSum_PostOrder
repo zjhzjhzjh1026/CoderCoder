@@ -1,0 +1,43 @@
+/*********************************************************************************
+*FileName:112_PathSum_PostOrder
+*Author : Javan_Z
+*Version : 2.0
+*Date : 2016.9.29
+Use stack to do postorder traverse.
+**********************************************************************************/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	bool hasPathSum(TreeNode* root, int sum) {
+		stack<TreeNode*> s;
+		TreeNode* pre = NULL, *cur = root;
+		int SUM = 0;
+		while (!s.empty() || cur) {
+			while (cur) {
+				s.push(cur);
+				SUM += cur->val;
+				cur = cur->left;
+			}
+			cur = s.top();
+			if (!cur->left && !cur->right&&sum == SUM) return true;
+			if (cur->right&&pre != cur->right) {
+				cur = cur->right;
+			}
+			else {
+				pre = cur;
+				s.pop();
+				SUM -= pre->val;
+				cur = NULL;
+			}
+		}
+		return false;
+	}
+};
