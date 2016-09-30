@@ -1,0 +1,35 @@
+/*********************************************************************************
+*FileName:117_PopulatingNextRightPointersInEachNodeII_SLOWERbutClearer
+*Author : Javan_Z
+*Version : 2.0
+*Date : 2016.9.30
+**********************************************************************************/
+/**
+* Definition for binary tree with next pointer.
+* struct TreeLinkNode {
+*  int val;
+*  TreeLinkNode *left, *right, *next;
+*  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
+* };
+*/
+class Solution {
+public:
+	void connect(TreeLinkNode *root) {
+		while (root) {
+			TreeLinkNode *tmp = new TreeLinkNode(0);
+			TreeLinkNode *cur = tmp;
+			while (root) {
+				if (root->left) {
+					cur->next = root->left;
+					cur = cur->next;
+				}
+				if (root->right) {
+					cur->next = root->right;
+					cur = cur->next;
+				}
+				root = root->next;
+			}
+			root = tmp->next;
+		}
+	}
+};
