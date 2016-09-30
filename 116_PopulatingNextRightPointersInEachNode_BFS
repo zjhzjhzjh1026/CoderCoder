@@ -23,7 +23,7 @@ public:
 			for (int i = 0; i<k; i++) {
 				TreeLinkNode* cur = q.front();
 				q.pop();
-				if (i == k - 1) cur->next = NULL;
+				if (i == k - 1) cur->next = NULL; //其实不用置NULL，直接判断i！=k-1即可
 				else {
 					TreeLinkNode* nex = q.front();
 					cur->next = nex;
