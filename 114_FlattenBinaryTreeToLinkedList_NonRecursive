@@ -1,0 +1,33 @@
+/*********************************************************************************
+*FileName:114_FlattenBinaryTreeToLinkedList_NonRecursive
+*Author : Javan_Z
+*Version : 2.0
+*Date : 2016.9.29
+**********************************************************************************/
+/**
+* Definition for a binary tree node.
+* struct TreeNode {
+*     int val;
+*     TreeNode *left;
+*     TreeNode *right;
+*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+* };
+*/
+class Solution {
+public:
+	void flatten(TreeNode* root) {
+		TreeNode* cur = root;
+		while (cur) {
+			if (cur->left) {
+				TreeNode *prev = cur->left;
+				while (prev->right) {
+					prev = prev->right;
+				}
+				prev->right = cur->right;
+				cur->right = cur->left;
+				cur->left = NULL;
+			}
+			cur = cur->right;
+		}
+	}
+};
